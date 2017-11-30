@@ -28,6 +28,7 @@ var count = 1;
        if(right < -3000){
          right = 0;
          slides[count].style.display= "none";
+         slides[count].style.backgroundPosition = right+"px";
          if (count == 0) {
            count++;
          }else{
