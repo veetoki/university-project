@@ -36,7 +36,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                      <a class='navbar-brand' href="{{route('admin.user')}}">Người dùng</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
