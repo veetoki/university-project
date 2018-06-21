@@ -37,6 +37,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                       <a class='navbar-brand' href="{{route('admin.user')}}">Người dùng</a>
+                      <a class='navbar-brand' href="{{route('admin.category')}}">Chuyên mục</a>
+                      <a class='navbar-brand' href="{{route('admin.product')}}">Sản phẩm</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

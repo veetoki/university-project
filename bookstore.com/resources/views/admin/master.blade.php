@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -13,6 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('head_styles')
+    <!-- Scripts -->
+    <script defer  src="{{asset('js/fontawesome-all.js')}}"></script>
+    @yield('head_scripts')
 </head>
 <body>
     <div id="app">
@@ -38,6 +41,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                       <a class='navbar-brand' href="{{route('admin.user')}}">Người dùng</a>
+                      <a class='navbar-brand' href="{{route('admin.category')}}">Chuyên mục</a>
+                      <a class='navbar-brand' href="{{route('admin.product')}}">Sản phẩm</a>
+                      <a class='navbar-brand' href="{{route('admin.order')}}">Đơn hàng</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,6 +82,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    @yield('body_scripts_top')
+    <script src="{{ asset('js/jquery.min.js') }}"></script> 
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+    @yield('body_scripts_bottom')
 </body>
 </html>

@@ -125,7 +125,7 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
-    /*
+   /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
@@ -179,6 +179,9 @@ return [
         // Third-Party IDE Helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        // Additional Library
+        App\lib\Providers\ToolServiceProvider::class,
     ],
 
     /*
@@ -228,6 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Tool' => App\lib\Facades\Tool::class,
     ],
 
 ];
