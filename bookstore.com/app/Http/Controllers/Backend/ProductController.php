@@ -46,7 +46,7 @@ class ProductController extends Controller
   public function show($id)
   {
     $data['product'] = Product::find($id);
-    $data['categories'] = Category::orderBy('name', 'asc')->get();
+    $data['categories'] = $this->createCategories(Category::orderBy('name', 'asc')->get());
     //Lay gia tri menu don cap
     if ($data['product'] !== null) {
       return view('admin.product.show', $data);
@@ -60,7 +60,7 @@ class ProductController extends Controller
    */
   public function create()
   {
-    $data['categories'] = Category::orderBy('name', 'asc')->get();
+    $data['categories'] = $this->createCategories(Category::orderBy('name', 'asc')->get());
     return view('admin.product.create', $data);
   }
 
@@ -304,7 +304,7 @@ class ProductController extends Controller
           }
           $product->tags()->sync($tagsID);
         }
-        return redirect()->route('admin.product')->with('message', "Cập nhật  sản phẩm $product->name thành công");
+        return redirect()->route('admin.product')->with('message', "Cập nhật  sản phẩm <a href='".route('admin.product.show',['id' => $id])."'>$product->name</a> thành công");
     }
     return redirect()->route('admin.product.index')->with('error', 'Không tìm thấy sản phẩm này');
   }
@@ -380,6 +380,17 @@ class ProductController extends Controller
       };
       $deleteAllImages(['_thumb', '_450x337', '_80x80']);
     }
+  }
+
+  public function createCategories($categories) 
+  {
+    $newArr = [];
+    if (count($categories) > 0) {
+      foreach ($categories as $category) {
+        $newArr[$category->parent][] = $category;
+      }
+    }
+    return $newArr;
   }
 
 }

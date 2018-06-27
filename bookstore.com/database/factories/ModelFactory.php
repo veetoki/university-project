@@ -22,15 +22,15 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Category::class, function (Faker $faker) {
-    $name = $faker->name;
-    return [
-        'name' => $name,
-        'slug' => str_slug($name),
-        'order' => rand(-100,100), // secret
-        'parent' => 0,
-    ];
-});
+// $factory->define(App\Category::class, function (Faker $faker) {
+//     $name = $faker->name;
+//     return [
+//         'name' => $name,
+//         'slug' => str_slug($name),
+//         'order' => rand(-100,100), // secret
+//         'parent' => 0,
+//     ];
+// });
 
 
 $factory->define(App\Product::class, function (Faker $faker) {
@@ -45,7 +45,7 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'attributes' => '',
         'image' => '',
         'user_id' => rand(1,50),
-        'category_id' => rand(1,50),
+        'category_id' => !in_array($category = rand(1,17), [2, 7, 12]) ? $category : 1,
     ];
 });
 

@@ -11,11 +11,13 @@ use App\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderConfirmation;
+use Illuminate\Support\Facades\View;
+use App\Category;
     class CheckoutController extends Controller 
     {
         public function __construct()
         {
-            
+            View::share('categories',$this->createCategories(Category::orderBy('name', 'desc')->get()));
         }
         
         public function index(Request $request)
@@ -97,7 +99,7 @@ use App\Mail\OrderConfirmation;
                     
                     // Gửi mail
                     Mail::to($order->email)
-                        ->send(new OrderConfirmation($order));
+                        ->queue(new OrderConfirmation($order));
 
                     $cookie = cookie('cart', null , 720);
                     return  redirect()->route('frontend.checkout.thankYou')->with('orderID', $order->id)->cookie($cookie);
@@ -111,6 +113,17 @@ use App\Mail\OrderConfirmation;
         public function thankYou()
         {
             return view('frontend.default.thankyou');
+        }
+
+        public function createCategories($categories) 
+        {
+            $newArr = [];
+            if (count($categories) > 0) {
+                foreach ($categories as $category) {
+                    $newArr[$category->parent][] = $category;
+                }
+            }
+            return $newArr;
         }
     }
 

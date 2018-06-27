@@ -40,6 +40,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUserId($value)
  * @mixin \Eloquent
+ * @property int $featured_product
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Attachment[] $attachment
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereFeaturedProduct($value)
  */
 class Product extends Model
 {

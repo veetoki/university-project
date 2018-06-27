@@ -3,12 +3,12 @@
 <div class="container">
   <div class="col-md-12">
     <div class="panel">
-    <div class="panel-heading">Tạo Sản Phẩm</div>
+    <div class="panel-heading">Tạo Chuyên Mục</div>
     <div class='panel-body'>
       <form action="{{route('admin.category.store')}}" method="post">
       {{csrf_field()}}
   <div class="form-group {{$errors->has('name') ? 'has-error' : '' }}">
-    <label for="InputName">Tên sản phẩm</label>
+    <label for="InputName">Tên chuyên mục</label>
     <input type="text" class="form-control" id="InputName"  name="name" value="{{old('name')}}" placeholder="Nhập vào chuyên mục ">
     <small id="nameHelpBlock" class="form-text text-muted text-danger">
       {{$errors->first('name')}}

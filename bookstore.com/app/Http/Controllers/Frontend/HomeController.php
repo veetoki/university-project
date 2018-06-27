@@ -8,6 +8,8 @@ use App\Product;
 use Illuminate\Support\Facades\Validator;
 use App\Comment;
 use Illuminate\Support\Facades\DB;
+use App\Category;
+use Illuminate\Support\Facades\View;
 class HomeController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
+        View::share('categories',$this->createCategories(Category::orderBy('name', 'desc')->get()));
     }
 
     /**
@@ -104,5 +106,51 @@ class HomeController extends Controller
             );
         }
         return redirect()->back()->with('message', 'Bạn đã đánh giá thành công');
+    }
+
+    public function productIndex(Request $request)
+    {
+        $products = Product::orderBy('id', 'desc');
+        if ($orderBy = $request->input('orderBy')) {
+            switch ($orderBy) {
+                case 'newest':
+                    $products = Product::orderBy('id', 'desc');
+                    break;
+                case 'oldest':
+                    $products = Product::orderBy('id', 'asc');
+                    break;
+                case 'expensive':
+                    $products = Product::orderBy('sale_price', 'desc');
+                    break;
+                case 'cheapest':
+                    $products = Product::orderBy('sale_price', 'asc');
+                    break;
+                default:
+                    break;
+            }
+        }
+        if ($keywork = $request->input('search')) {
+            $products->where(function($query) use($keywork){
+                $query->where('name', 'like', "%$keywork%");
+                $query->orWhere('code', 'like', "%$keywork%");
+            });
+        }
+
+        if ($category = $request->input('category')) {
+            $products->where('category_id', $category);
+        }
+        $data['products'] = $products->paginate(20);
+        return view('frontend.default.products', $data);
+    }
+
+    public function createCategories($categories) 
+    {
+        $newArr = [];
+        if (count($categories) > 0) {
+            foreach ($categories as $category) {
+                $newArr[$category->parent][] = $category;
+            }
+        }
+        return $newArr;
     }
 }

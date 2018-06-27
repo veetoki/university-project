@@ -5,11 +5,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\View;
+use App\Category;
     class CartController extends Controller 
     {
         public function __construct()
         {
-            
+            View::share('categories',$this->createCategories(Category::orderBy('name', 'desc')->get()));
         }
         public function index(Request $request)
         {
@@ -109,6 +111,16 @@ use Illuminate\Support\Facades\Cookie;
                 'total' => count($cart),
                 'sumPrice' => number_format($sumPrice, 0, ',', '.')
             ]);
+        }
+        public function createCategories($categories) 
+        {
+            $newArr = [];
+            if (count($categories) > 0) {
+                foreach ($categories as $category) {
+                    $newArr[$category->parent][] = $category;
+                }
+            }
+            return $newArr;
         }
     }
 

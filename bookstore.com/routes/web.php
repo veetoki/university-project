@@ -56,6 +56,7 @@ Route::prefix('/admin')->namespace('Backend')->name('admin.')->group(/*['prefix'
 
 Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 'as' => 'admin.'],*/ function(){
   Route::get('/','HomeController@index')->name('home.index');
+  Route::get('/products','HomeController@productIndex')->name('home.productIndex');
   Route::get("/product/{slug}-{id}.html", 'HomeController@show')
           ->name('home.show')
           ->where([

@@ -79,11 +79,23 @@
                     </div>
                     {{--  {{dd($errors->all())}}  --}}
                     <div class="form-group {{$errors->has('category_id') ? 'has-error' : '' }}">
-                        <label for="InputCategoryId">Chuyên mục cha</label>
+                        <label for="InputCategoryId">Chuyên mục</label>
                         <select name="category_id" id="category_id" class="form-control">
-                            @if (count($categories) > 0) @foreach ($categories as $category)
-                            <option value="{{$category->id}}" {{old('category_id')==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
-                            @endforeach @endif
+                            @if (count($categories[0]) > 0) 
+                                @foreach ($categories[0] as $category)
+                                    @if ($category->id !== 1)
+                                    <optgroup label="{{$category->name}}">
+                                        @if (isset($categories[$category->id]))
+                                            @foreach ($categories[$category->id] as $childCategory)
+                                                <option value="{{$childCategory->id}}" {{old('category_id')==$childCategory->id ? 'selected' : ''}}>{{$childCategory->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </optgroup>
+                                    @else
+                                        <option value="{{$category->id}}" {{old('category_id')==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                    @endif
+                                @endforeach 
+                            @endif
                         </select>
                         <small id="nameHelpBlock" class="form-text text-muted text-danger">
                             {{$errors->first('category_id')}}

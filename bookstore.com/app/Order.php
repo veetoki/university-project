@@ -23,6 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUserId($value)
  * @mixin \Eloquent
+ * @property string $name
+ * @property-read \App\User|null $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereName($value)
  */
 class Order extends Model
 {
