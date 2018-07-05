@@ -13,7 +13,9 @@ class OrderController extends Controller
 
     public function index()
     {
-      $data['orders'] = Order::orderBy('id','desc')->paginate(20);
+      $data['orders'] = Order::where('status',0)->orderBy('id','desc')->paginate(20);
+      $data['confirmedOrders'] = Order::where('status',1)->orderBy('id','desc')->paginate(20);
+      $data['deliveredOrders'] = Order::where('status',2)->orderBy('id','desc')->paginate(20);
       return view('admin.order.index',$data);
     }
 
@@ -34,5 +36,29 @@ class OrderController extends Controller
         return redirect()->route('admin.order')->with('message', "Xóa đơn hàng $order->name thành công");
         }
         return redirect()->route('admin.order.index')->with('error', "Không tìm thấy đơn hàng này");
+    }
+    
+    public function changeOrderStatus($id)
+    {
+      $order = Order::find($id);
+      if ($order !== null) {
+        switch ($order->status) {
+          case 0:
+            $order->status = 1;
+            $message = "Đơn hàng <a href='".route('admin.order')."'>#$order->id</a> đã được xác nhận";
+            break;
+          case 1:
+            $order->status = 2;
+            $message = "Đơn hàng <a href='".route('admin.order')."#deliver'>#$order->id</a> đã được vận chuyển";
+            break;
+          default:
+            break;
+        }
+        $order->save();
+        return redirect()
+               ->route('admin.order')
+               ->with('message', $message);
+      }
+      return redirect()->route('admin.order')->with('message', "Không tìm thấy đơn hàng này");
     }
 }

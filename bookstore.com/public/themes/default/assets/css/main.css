@@ -3351,7 +3351,7 @@ header .top-cart-row .top-cart-holder .total-price-basket {
   padding: 21px;
   border: 1px solid #e0e0e0;
 }
-.comment-item .comment-body:before,
+/* .comment-item .comment-body:before,
 .comment-item .comment-body:after {
   content: "";
   border-width: 7.5px 10px 7.5px 0;
@@ -3360,7 +3360,7 @@ header .top-cart-row .top-cart-holder .total-price-basket {
   border-style: solid;
   position: absolute;
   top: 20px;
-}
+} */
 .comment-item .comment-body:before {
   left: -10px;
   border-color: transparent #e0e0e0 transparent transparent;

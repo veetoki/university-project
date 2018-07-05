@@ -10,7 +10,7 @@
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>MediaCenter - Responsive eCommerce Template</title>
+    <title>Book Store</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('themes/default/assets/css/bootstrap.min.css') }}">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('themes/default/assets/css/font-awesome.min.css') }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('themes/default/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('themes/default/assets/images/favicon1.ico') }}">
 
 {{-- Theme Styles --}}
 @yield('styles')
@@ -53,7 +53,7 @@
         <div class="container">
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul>
-                    <li><a href="{{route('frontend.home.index')}}">Home</a></li>
+                    <li><a href="{{route('frontend.home.index')}}">Trang chủ</a></li>
                     {{--  <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#change-colors">Change Colors</a>
 
@@ -99,9 +99,9 @@
                 </ul>
             </div><!-- /.col -->
 
-            {{--  <div class="col-xs-12 col-sm-6 no-margin">
+            <div class="col-xs-12 col-sm-6 no-margin">
                 <ul class="right">
-                    <li class="dropdown">
+                    {{--  <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#change-language">English</a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Turkish</a></li>
@@ -119,11 +119,34 @@
                             </li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Dollar (US)</a></li>
                         </ul>
-                    </li>
-                    <li><a href="authentication.html">Register</a></li>
-                    <li><a href="authentication.html">Login</a></li>
+                    </li>  --}}
+                    @if(!Auth::check())
+                        <li><a href="{{route('frontend.login')}}">Register</a></li>
+                        <li><a href="{{route('frontend.login')}}">Login</a></li>
+                    @else
+                    <li class="dropdown">
+                            Xin chào,<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                {{ Auth::user()->name }} 
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('frontend.home.orderHistory', ['id' => Auth::user()->id]) }}">Lịch sử đặt hàng</a></li> 
+                                <li>
+                                    <a href="{{ route('frontend.logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        Thoát
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('frontend.logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>                  
+                    @endif   
                 </ul>
-            </div><!-- /.col -->  --}}
+            </div><!-- /.col -->
         </div><!-- /.container -->
     </nav><!-- /.top-bar -->
     <!-- ============================================================= TOP NAVIGATION : END ============================================================= -->
@@ -135,9 +158,9 @@
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
                     <a href="{{route('frontend.home.index')}}">
-                    <!--<img alt="logo" src="{{ asset('themes/default/assets/images/logo.svg') }}" width="233" height="54"/>-->
+                    <img alt="logo" src="{{ asset('themes/default/assets/images/logo.svg') }}" width="233" height="54"/>
                     <!--<object id="sp" type="image/svg+xml" data="{{ asset('themes/default/assets/images/logo.svg') }}" width="233" height="54"></object>-->
-                        <svg width="233px" height="54px" viewBox="0 0 233 54" version="1.1"
+                        {{--  <svg width="233px" height="54px" viewBox="0 0 233 54" version="1.1"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill="#ffffff"
                                   d=" M 0.00 0.00 L 233.00 0.00 L 233.00 54.00 L 0.00 54.00 L 0.00 0.00 Z"/>
@@ -175,7 +198,7 @@
                                   d=" M 137.58 37.63 C 141.09 35.82 145.16 36.85 148.82 37.59 C 148.82 38.98 148.80 40.38 148.79 41.78 C 145.51 43.89 141.25 45.34 137.54 43.42 C 135.23 42.33 135.28 38.72 137.58 37.63 Z"/>
                             <path class="logo-svg"
                                   d=" M 163.30 39.16 C 165.64 38.00 168.47 38.66 171.01 38.49 C 172.96 38.53 176.17 38.23 176.35 40.94 C 176.51 46.79 170.77 51.96 165.05 51.93 C 161.43 51.79 162.41 47.39 162.23 44.97 C 162.49 43.09 161.71 40.56 163.30 39.16 Z"/>
-                        </svg>
+                        </svg>  --}}
                     </a>
                 </div><!-- /.logo -->
                 <!-- ============================================================= LOGO : END ============================================================= -->
@@ -187,7 +210,7 @@
                         <i class="fa fa-phone"></i> (+800) 123 456 7890
                     </div>
                     <div class="contact inline">
-                        <i class="fa fa-envelope"></i> contact@<span class="le-color">oursupport.com</span>
+                        <i class="fa fa-envelope"></i> contact@<span class="le-color">bookstore.com</span>
                     </div>
                 </div><!-- /.contact-row -->
                 <!-- ============================================================= SEARCH AREA ============================================================= -->
@@ -196,44 +219,27 @@
                             
                             <div class="control-group">
                                 <input class="search-field" name="search" placeholder="Tìm kiếm sản phẩm" value="{{Request::input('search') ? Request::input('search') : ''}}"/>
-                            <ul class="categories-filter animate-dropdown">
-                                <li class="dropdown">
-
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="category-grid.html">all
-                                        categories</a>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">laptops</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">tv & audio</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">gadgets</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                                   href="category-grid.html">cameras</a></li>
-
-                                    </ul>
-                                </li>
-                            </ul>
+                            
 
                             <a class="search-button" href='#' onclick="event.preventDefault(); document.getElementById('search-form').submit();"></a>
-
+                            
                         </div>
                     </form>
+                 
                 </div><!-- /.search-area -->
                 <!-- ============================================================= SEARCH AREA : END ============================================================= -->
             </div><!-- /.top-search-holder -->
-
             <div class="col-xs-12 col-sm-12 col-md-3 top-cart-row no-margin">
+               
                 <div class="top-cart-row-container">
-                    <div class="wishlist-compare-holder">
+                    {{--  <div class="wishlist-compare-holder">
                         <div class="wishlist ">
                             <a href="#"><i class="fa fa-heart"></i> wishlist <span class="value">(21)</span> </a>
                         </div>
                         <div class="compare">
                             <a href="#"><i class="fa fa-exchange"></i> compare <span class="value">(2)</span> </a>
                         </div>
-                    </div>
+                    </div>  --}}
 
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
                     <div class="top-cart-holder dropdown animate-dropdown">
@@ -552,7 +558,7 @@
             </div><!-- /.widgets-row-->
         </div><!-- /.container -->  --}}
 
-        <div class="sub-form-row">
+        {{-- <div class="sub-form-row">
             <div class="container">
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 no-padding">
                     <form role="form">
@@ -561,7 +567,7 @@
                     </form>
                 </div>
             </div><!-- /.container -->
-        </div><!-- /.sub-form-row -->
+        </div><!-- /.sub-form-row --> --}}
 
         <div class="link-list-row">
             <div class="container no-padding">
@@ -569,7 +575,8 @@
                     <!-- ============================================================= CONTACT INFO ============================================================= -->
                     <div class="contact-info">
                         <div class="footer-logo">
-                            <svg width="233px" height="54px" viewBox="0 0 233 54" version="1.1"
+                            <img alt="logo" src="{{ asset('themes/default/assets/images/logo.svg') }}" width="233" height="54"/>
+                            {{-- <svg width="233px" height="54px" viewBox="0 0 233 54" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path fill="#f9f9f9"
                                       d=" M 0.00 0.00 L 233.00 0.00 L 233.00 54.00 L 0.00 54.00 L 0.00 0.00 Z"/>
@@ -607,7 +614,7 @@
                                       d=" M 137.58 37.63 C 141.09 35.82 145.16 36.85 148.82 37.59 C 148.82 38.98 148.80 40.38 148.79 41.78 C 145.51 43.89 141.25 45.34 137.54 43.42 C 135.23 42.33 135.28 38.72 137.58 37.63 Z"/>
                                 <path class="logo-svg"
                                       d=" M 163.30 39.16 C 165.64 38.00 168.47 38.66 171.01 38.49 C 172.96 38.53 176.17 38.23 176.35 40.94 C 176.51 46.79 170.77 51.96 165.05 51.93 C 161.43 51.79 162.41 47.39 162.23 44.97 C 162.49 43.09 161.71 40.56 163.30 39.16 Z"/>
-                            </svg>
+                            </svg> --}}
                         </div><!-- /.footer-logo -->
 
                         <p class="regular-bold"> Feel free to contact us via phone,email or just send us mail.</p>
@@ -693,7 +700,7 @@
             <div class="container">
                 <div class="col-xs-12 col-sm-6 no-margin">
                     <div class="copyright">
-                        &copy; <a href="{{route('frontend.home.index')}}">Media Center</a> - all rights reserved
+                        &copy; <a href="{{route('frontend.home.index')}}">Book Store</a> - all rights reserved
                     </div><!-- /.copyright -->
                 </div>
                 <div class="col-xs-12 col-sm-6 no-margin">

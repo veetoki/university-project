@@ -51,6 +51,7 @@ class Product extends Model
   protected $fillable = [
     'name',
     'code',
+    'author',
     'summary',
     'regular_price',
     'sale_price',
@@ -87,7 +88,7 @@ class Product extends Model
   }
   public function orders()
   {
-    return $this->belongsToMany('App\Product', 'product_order', 'product_id', 'order_id')->withPivot('quantity')->withTimestamps();
+    return $this->belongsToMany('App\Order', 'product_order', 'product_id', 'order_id')->withPivot('quantity')->withTimestamps();
   }
   public function attachment()
   {

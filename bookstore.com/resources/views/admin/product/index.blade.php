@@ -22,6 +22,7 @@
             <th scope='row'>#</th>
             <th scope='row'>Tên</th>
             <th scope='row'>Mã</th>
+            <th scope="row">Tác giả</th>
             <th scope='row'>Giá bán</th>
             <th scope='row'>Số lượng</th>
             <th scope='row' >Hình ảnh</th>
@@ -37,6 +38,7 @@
               <td scope='row'>{{$product->id}}</td>
               <td>{{$product->name}}</td>
               <td>{{$product->code}}</td>
+              <td>{{$product->author}}</td>
               <td>{{$product->sale_price}}</td>
               <td>{{$product->quantity}}</td>
               <td>

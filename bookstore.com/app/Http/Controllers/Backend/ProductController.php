@@ -76,6 +76,7 @@ class ProductController extends Controller
       [
         'name' => 'required',
         'code' => "required|unique:products,code",
+        'author' => "required",
         'summary' => 'required',
         'regular_price' => 'required|numeric|min:0',
         'sale_price' => 'required|numeric|min:0',
@@ -89,6 +90,7 @@ class ProductController extends Controller
         'name.required' => 'Vui lòng nhập vào tên sản phẩm',
         'code.unique' => 'Mã sản phẩm đã tồn tại',
         'code.required' => 'Vui lòng nhập Mã sản phẩm',
+        'author.required' => 'Vui lòng nhập tên tác giả',
         'summary.required' => 'Vui lòng nhập nội dung',
         'category_id' => 'Vui lòng nhập id của chuyên mục',
         'category_id.exists' => 'Vui lòng nhập đúng id của chuyên mục',
@@ -136,6 +138,7 @@ class ProductController extends Controller
       $product = Product::create([
         'name' => $request->input('name'),
         'code' => mb_strtoupper($request->input('code'), 'UTF-8'),
+        'author' => $request->input('author'),
         'summary' => $request->input('summary'),
         'regular_price' => $request->input('regular_price'),
         'sale_price' => $request->input('sale_price'),
@@ -177,7 +180,7 @@ class ProductController extends Controller
         }
         $product->tags()->sync($tagsID);
       }
-      return redirect()->route('admin.product')->with('message', "Tạo sản phẩm $product->name thành công");
+      return redirect()->route('admin.product')->with('message', "Tạo sản phẩm <a href='".route('admin.product.show',['id' => $product->id])."'>$product->name</a> thành công");
     }
     return 'store';
   }
@@ -194,6 +197,7 @@ class ProductController extends Controller
       [
         'name' => 'required',
         'code' => "required|unique:products,code," . $id,
+        'author' => "required",
         'summary' => 'required',
         'regular_price' => 'required|numeric|min:0',
         'sale_price' => 'required|numeric|min:0',
@@ -207,8 +211,9 @@ class ProductController extends Controller
         'name.required' => 'Vui lòng nhập vào tên sản phẩm',
         'code.unique' => 'Mã sản phẩm đã tồn tại',
         'code.required' => 'Vui lòng nhập Mã sản phẩm',
+        'author.required' => 'Vui lòng nhập tên tác giả',
         'summary.required' => 'Vui lòng nhập nội dung',
-        'category_id' => 'Vui lòng nhập id của chuyên mục',
+        'category_id.required' => 'Vui lòng nhập id của chuyên mục',
         'category_id.exists' => 'Vui lòng nhập đúng id của chuyên mục',
         'regular_price.required' => 'Vui lòng nhập giá thị trường',
         'regular_price.numeric' => 'Vui lòng nhập số',
@@ -273,10 +278,11 @@ class ProductController extends Controller
           }
           $attributes = json_encode($attributes);
         }
-
+        
 
         $product->name = $request->input('name');
         $product->code = mb_strtoupper($request->input('code'), 'UTF-8');
+        $product->author = $request->input('author');
         $product->regular_price = $request->input('regular_price');
         $product->sale_price = $request->input('sale_price');
         $product->original_price = $request->input('original_price');

@@ -17,44 +17,45 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('/admin')->namespace('Backend')->name('admin.')->group(/*['prefix' => '/admin', 'as' => 'admin.'],*/ function(){
-  //User
-  Route::get('/user', 'UserController@index')->name('user');
-  Route::get('/user/create', 'UserController@create')->name('user.create');
-  Route::post('/user', 'UserController@store')->name('user.store');
-  Route::get('/user/{id}', 'UserController@show')->name('user.show');
-  Route::put('/user/{id}', 'UserController@update')->name('user.update');
-  Route::delete('/user/{id}', 'UserController@delete')->name('user.delete');
-
-  //Category
-  Route::get('/category', 'CategoryController@index')->name('category');
-  Route::get('/category/create', 'CategoryController@create')->name('category.create');
-  Route::post('/category', 'CategoryController@store')->name('category.store');
-  Route::get('/category/{id}', 'CategoryController@show')->name('category.show');
-  Route::put('/category/{id}', 'CategoryController@update')->name('category.update');
-  Route::delete('/category/{id}', 'CategoryController@delete')->name('category.delete');
-
-  //Product
-  Route::get('/product', 'ProductController@index')->name('product');
-  Route::get('/product/create', 'ProductController@create')->name('product.create');
-  Route::post('/product', 'ProductController@store')->name('product.store');
-  Route::get('/product/{id}', 'ProductController@show')->name('product.show');
-  Route::put('/product/{id}', 'ProductController@update')->name('product.update');
-  Route::delete('/product/{id}', 'ProductController@delete')->name('product.delete');
-  Route::patch('/product/{id}', 'ProductController@setFeaturedProduct')->name('product.setFeaturedProduct');
-
-  //Order
-  Route::get('/order', 'OrderController@index')->name('order');
-  Route::get('/order/{id}', 'OrderController@show')->name('order.show');
-  Route::delete('/order/{id}', 'OrderController@delete')->name('order.delete');
-
+Route::prefix('/admin')->namespace('Backend')->name('admin.')->middleware('checkRoles:admin')->group(/*['prefix' => '/admin', 'as' => 'admin.'],*/ function(){
+  Auth::routes();
+      //User
+      Route::get('/user', 'UserController@index')->name('user');
+      Route::get('/user/create', 'UserController@create')->name('user.create');
+      Route::post('/user', 'UserController@store')->name('user.store');
+      Route::get('/user/{id}', 'UserController@show')->name('user.show');
+      Route::put('/user/{id}', 'UserController@update')->name('user.update');
+      Route::delete('/user/{id}', 'UserController@delete')->name('user.delete');
+    
+      //Category
+      Route::get('/category', 'CategoryController@index')->name('category');
+      Route::get('/category/create', 'CategoryController@create')->name('category.create');
+      Route::post('/category', 'CategoryController@store')->name('category.store');
+      Route::get('/category/{id}', 'CategoryController@show')->name('category.show');
+      Route::put('/category/{id}', 'CategoryController@update')->name('category.update');
+      Route::delete('/category/{id}', 'CategoryController@delete')->name('category.delete');
+    
+      //Product
+      Route::get('/product', 'ProductController@index')->name('product');
+      Route::get('/product/create', 'ProductController@create')->name('product.create');
+      Route::post('/product', 'ProductController@store')->name('product.store');
+      Route::get('/product/{id}', 'ProductController@show')->name('product.show');
+      Route::put('/product/{id}', 'ProductController@update')->name('product.update');
+      Route::delete('/product/{id}', 'ProductController@delete')->name('product.delete');
+      Route::patch('/product/{id}', 'ProductController@setFeaturedProduct')->name('product.setFeaturedProduct');
+    
+      //Order
+      Route::get('/order', 'OrderController@index')->name('order');
+      Route::get('/order/{id}', 'OrderController@show')->name('order.show');
+      Route::delete('/order/{id}', 'OrderController@delete')->name('order.delete');    
+      Route::patch('/order/{id}', 'OrderController@changeOrderStatus')->name('order.changeOrderStatus');
 });
 
 Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 'as' => 'admin.'],*/ function(){
+  Auth::routes();
   Route::get('/','HomeController@index')->name('home.index');
   Route::get('/products','HomeController@productIndex')->name('home.productIndex');
   Route::get("/product/{slug}-{id}.html", 'HomeController@show')
@@ -69,6 +70,9 @@ Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 
             'slug' => '[a-z-]+',
             'id' => '[0-9]+'
           ]);
+
+  Route::get('/orderHistory/{id}','HomeController@orderHistory')->name('home.orderHistory');
+  Route::get('/orderDetail/{id}','HomeController@orderDetail')->name('home.orderDetail');
 
   Route::get('/cart','CartController@index')->name('cart.index');
   Route::post('/cart','CartController@updateCart')->name('cart.updateCart');

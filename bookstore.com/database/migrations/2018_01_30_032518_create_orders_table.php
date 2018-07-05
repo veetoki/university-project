@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('phone');
+            $table->unsignedTinyInteger('status')->default(0);
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users')

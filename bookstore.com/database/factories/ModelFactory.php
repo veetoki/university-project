@@ -35,14 +35,15 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Product::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->sentence(),
         'code' => strtoupper(str_random(6)),
+        'author' => $faker->name,
         'summary' => $faker->text,
         'regular_price' => rand(1,1000),
         'sale_price' => rand(1001,2000),
         'original_price' => rand(1,1000),
         'quantity' => rand(1,100),
-        'attributes' => '',
+        'attributes' => json_encode([ ['name' => 'Số trang', 'value' => rand(100,900)] ]),
         'image' => '',
         'user_id' => rand(1,50),
         'category_id' => !in_array($category = rand(1,17), [2, 7, 12]) ? $category : 1,

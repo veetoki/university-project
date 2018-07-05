@@ -312,12 +312,13 @@
         // Quantity Spinner
         $('.le-quantity a').click(function(e){
             e.preventDefault();
-            var currentQty= $(this).parent().parent().find('input').val();
+            var currentQty= $(this).parent().parent().find('#quantity').val();
+            var maxQty = $(this).parent().parent().find('#maxQuantity').val();
             if( $(this).hasClass('minus') && currentQty>0){
-                $(this).parent().parent().find('input').val(parseInt(currentQty, 10) - 1);
+                $(this).parent().parent().find('#quantity').val(parseInt(currentQty, 10) - 1);
             }else{
-                if( $(this).hasClass('plus')){
-                    $(this).parent().parent().find('input').val(parseInt(currentQty, 10) + 1);
+                if( $(this).hasClass('plus') && parseInt(currentQty,10) < parseInt(maxQty,10)){
+                    $(this).parent().parent().find('#quantity').val(parseInt(currentQty, 10) + 1);
                 }
             }
         });

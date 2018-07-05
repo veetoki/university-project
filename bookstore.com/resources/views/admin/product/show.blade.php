@@ -20,6 +20,13 @@
                             {{$errors->first('code')}}
                         </small>
                     </div>
+                    <div class="form-group {{$errors->has('author') ? 'has-error' : '' }}">
+                        <label for="InputAuthor">Tác giả</label>
+                        <input type="text" class="form-control" id="InputAuthor" name="author" value="{{$product->author}}" placeholder="Nhập vào tên tác giả">
+                        <small id="nameHelpBlock" class="form-text text-muted text-danger">
+                            {{$errors->first('author')}}
+                        </small>
+                    </div>
                     <div class="form-group {{$errors->has('summary') ? 'has-error' : '' }}">
                         <label for="InputSummary">Nội dung</label>
                         <textarea type="content" class="form-control" id="InputSummary" name="summary" placeholder="Nhập vào nội dung" rows="4">{{$product->summary}}</textarea>

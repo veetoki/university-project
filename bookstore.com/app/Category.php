@@ -43,5 +43,15 @@ class Category extends Model
   {
     return $this->hasMany('App\Product', 'id', 'category_id');
   }
-  
+  public static function getCategories() 
+    {
+        $categories = Category::all();
+        $newArr = [];
+        if (count($categories) > 0) {
+            foreach ($categories as $category) {
+                $newArr[$category->parent][] = $category;
+            }
+        }
+        return $newArr;
+    }
 }

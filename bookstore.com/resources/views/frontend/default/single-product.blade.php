@@ -94,21 +94,31 @@
                 <div class="title">
                     <a href="#">{{$product->name}}</a>
                 </div>
-                {{--
-                <div class="brand">{{$product->code}}</div> --}}
-
+                <br> 
+                <div>
+                    <label for="">Tác giả:</label> {{$product->author}}
+                </div> 
+                <br>
+                <div>
+                    @php 
+                        $attributeDecode = json_decode($product->attributes,true);
+                        $page = $attributeDecode[0]["value"];
+                        $namePage = $attributeDecode[0]["name"];
+                    @endphp
+                    <label for="">{{$namePage}}:</label> {{$page}}
+                </div>  
                 <div class="social-row">
                     <span class="st_facebook_hcount"></span>
                     <span class="st_twitter_hcount"></span>
                     <span class="st_pinterest_hcount"></span>
                 </div>
 
-                <div class="buttons-holder">
+                {{-- <div class="buttons-holder">
                     <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
                     <a class="btn-add-to-compare" href="#">add to compare list</a>
-                </div>
+                </div> --}}
 
-                <div class="excerpt">
+                <div>
                     <p>{{$product->summary}}</p>
                 </div>
 
@@ -117,16 +127,19 @@
                     <div class="price-prev">{{number_format($product->regular_price, 0, ',', '.')}} VNĐ</div>
                 </div>
 
+                @if($product->quantity > 0)
                 <div class="qnt-holder">
                     <div class="le-quantity">
                         <form>
-                            <a class="minus" href="#reduce" v-on:click="subtractQuantity"></a>
-                            <input name="quantity" readonly="readonly" type="text" value="1" />
+                            <a class="minus" href="#minus" v-on:click="subtractQuantity"></a>
+                            <input id="quantity" name="quantity" readonly="readonly" type="text" value="1" />
+                            <input id="maxQuantity" type="hidden" value="{{$product->quantity}}" />
                             <a class="plus" href="#add" v-on:click="addQuantity"></a>
                         </form>
                     </div>
-                    <a id="addto-cart" href="cart.html" class="le-button huge" v-on:click="addToCart({{$product->id}} , $event, true)">Thêm giỏ hàng</a>
+                    <a id="addto-cart" v-on:click="addToCart({{$product->id}}, $event, true)" href="cart.html" class="le-button huge" >Thêm giỏ hàng</a>
                 </div>
+                @endif
                 <!-- /.qnt-holder -->
             </div>
             <!-- /.body -->
@@ -194,7 +207,7 @@
                 <!-- /.tab-pane #description -->
 
                 <div class="tab-pane" id="additional-info">
-                    <ul class="tabled-data">
+                    <ul><!--class="tabled-data"-->
                         @php 
                             $product->attributes = json_decode($product->attributes); 
                             if(!$product->attributes)
@@ -204,8 +217,8 @@
                         @endphp
                         @forelse ($product->attributes as $attribute)
                         <li>
-                            <label>{{$attribute->name}}</label>
-                            <div class="value">{{$attribute->value}}</div>
+                            <label>{{$attribute->name}}:</label> {{$attribute->value}}
+                            {{--  <div class="value"></div>  --}}
                         </li>
                         @empty @endforelse
                     </ul>
@@ -250,15 +263,15 @@
                         @forelse ($product->comments as $comment)
                         <div class="comment-item">
                             <div class="row no-margin">
-                                <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
+                                {{-- <div class="col-lg-1 col-xs-12 col-sm-2 no-margin">
                                     <div class="avatar">
                                         <img alt="avatar" src="{{ asset('themes/default/assets/images/default-avatar.jpg') }}">
                                     </div>
                                     <!-- /.avatar -->
-                                </div>
+                                </div> --}}
                                 <!-- /.col -->
 
-                                <div class="col-xs-12 col-lg-11 col-sm-10 no-margin">
+                                <div class="col-xs-13 col-lg-12 col-sm-11 no-margin">
                                     <div class="comment-body">
                                         <div class="meta-info">
                                             <div class="author inline">
@@ -297,6 +310,7 @@
                                 <h2>Thêm đánh giá</h2>
                                 <form id="contact-form" class="contact-form" method="post" action="{{ route('frontend.home.comment',['id' => $product->id , 'slug' => str_slug($product->name)]) }}">
                                     {{csrf_field()}}
+                                    @if(!Auth::check())
                                     <div class="row field-row">
                                         <div class="col-xs-12 col-sm-6" {{$errors->has('name') ? 'has-error' : ''}}>
                                             <label>Tên của bạn*</label>
@@ -314,7 +328,14 @@
                                         </div>
                                     </div>
                                     <!-- /.field-row -->
-
+                                    @else
+                                    <div class='text'>
+                                        <h4>{{Auth::user()->name}} ({{Auth::user()->email}})</h4>
+                                        <input class="le-input" name="name" type="hidden" value="{{Auth::user()->name}}">
+                                        <input class="le-input" name="email" type="hidden" value="{{Auth::user()->email}}">
+                                    </div>
+                                    <br>
+                                    @endif
                                     <div class="field-row star-row" {{$errors->has('score') ? 'has-error' : ''}}>
                                         <label>Đánh giá*</label>
                                         <div class="star-holder">
@@ -337,7 +358,7 @@
                                     <!-- /.field-row -->
 
                                     <div class="buttons-holder">
-                                        <button type="submit" class="le-button huge">submit</button>
+                                        <button type="submit" class="le-button huge">Bình luận</button>
                                     </div>
                                     <!-- /.buttons-holder -->
                                 </form>
@@ -397,7 +418,7 @@
                                     <div class="title">
                                          <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}">{{ $product->name }}</a> 
                                     </div>
-                                    <div class="brand">{{ $product->code }}</div>
+                                    <div class="brand">{{ $product->author }}</div>
                                 </div>
                                 <div class="prices">
                                     <div class="price-prev">{{ number_format($product->regular_price, 0, ',', '.') }}</div>
@@ -413,6 +434,7 @@
                                     {{--<a class="btn-add-to-compare" href="#">compare</a>--}}
                                     {{--</div>--}}
                                 </div>
+                            
                             </div>
                         </div><!-- /.product-item -->
                         @endforeach

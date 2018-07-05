@@ -79,6 +79,9 @@ use App\Category;
                         ];
                     }else {
                         $cart[$id]['quantity'] += is_numeric($request->input('quantity')) && $request->input('quantity') > 0 ? $request->input('quantity') : 1;
+                        if ($cart[$id]['quantity'] > $product->quantity) {
+                            $cart[$id]['quantity'] = $product->quantity;
+                        }
                     }
                     $cookie = cookie('cart' , json_encode($cart) , 720);
                 }

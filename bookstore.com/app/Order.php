@@ -35,7 +35,8 @@ class Order extends Model
     'name',
     'address',
     'email',
-    'phone'
+    'phone',
+    'status'
   ];  
 
   /**

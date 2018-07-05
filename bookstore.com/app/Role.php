@@ -12,4 +12,8 @@ class Role extends EntrustRole
         'display_name',
         'description',
     ];
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'role_user', 'role_id', 'user_id');
+    }
 }

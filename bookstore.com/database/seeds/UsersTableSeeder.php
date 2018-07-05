@@ -11,12 +11,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-      User::create([
+      $admin = User::create([
         'name' => "Quan Quach",
         'email' => 'vinhquan.1996@gmail.com',
         'password' => bcrypt('123456'),
         'remember_token' => str_random(10)
       ]);
-         factory(App\User::class, 50)->create();
+      $admin->roles()->sync([1,1]);
+      factory(App\User::class, 50)->create();
     }
 }

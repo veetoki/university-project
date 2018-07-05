@@ -10,6 +10,8 @@ use App\Comment;
 use Illuminate\Support\Facades\DB;
 use App\Category;
 use Illuminate\Support\Facades\View;
+use App\Order;
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -152,5 +154,34 @@ class HomeController extends Controller
             }
         }
         return $newArr;
+    }
+
+    public function orderHistory($id)
+    {
+        $total = 0;
+        $ordersId = User::find($id)->orders()->pluck('id');
+        foreach ($ordersId as $orderId) {
+            $names[$orderId] = Order::find($orderId)->products()->pluck('name');
+            $productsName[$orderId] =  implode(', ',$names[$orderId]->toArray());
+            $products[$orderId] = Order::find($orderId)->products;
+        }
+        foreach ($products as $key => $product) {
+            foreach ($product as $price) {
+                $total += $price->pivot->quantity * $price->sale_price;
+            }
+            $ordersTotal[$key] = $total;
+            $total = 0;
+        }
+        // dd($tempTotal);
+        $data['orders'] = User::find($id)->orders()->orderBy('id','desc')->paginate(5);
+        $data['productsName'] = $productsName;
+        $data['ordersTotal'] = $ordersTotal;
+        return view('frontend.default.order-history',$data);
+    }
+
+    public function orderDetail($id)
+    {
+       $data['order'] = Order::find($id);
+       return view('frontend.default.order-detail', $data);
     }
 }
