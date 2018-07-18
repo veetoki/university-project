@@ -12,16 +12,16 @@
     <br>
 
     <ul class="nav nav-tabs" style="min-width:750px">
-      <li class="nav-item "><a id="nav-neworder-tab" class="bg-primary nav-link active" data-toggle="tab" href="#neworder">Đơn hàng mới</a></li>
-      <li class="nav-item "><a id="nav-orderconfirm-tab" class="bg-primary nav-link" data-toggle="tab" href="#orderconfirm">Đơn hàng được xác nhận</a></li>
-      <li class="nav-item "><a id="nav-deliver-tab" class="bg-primary nav-link" data-toggle="tab" href="#deliver">Vận chuyển</a></li>
+      <li class="nav-item "><a id="nav-neworder-tab" class="bg-info nav-link active" data-toggle="tab" href="#neworder"><b>Đơn hàng mới</b></a></li>
+      <li class="nav-item "><a id="nav-orderconfirm-tab" class="bg-info nav-link" data-toggle="tab" href="#orderconfirm"><b>Đơn hàng được xác nhận</b></a></li>
+      <li class="nav-item "><a id="nav-deliver-tab" class="bg-info nav-link" data-toggle="tab" href="#deliver"><b>Vận chuyển</b></a></li>
     </ul>
 
     <div class="tab-content">
       <!-- Tab đơn hàng mới -->
       <div id="neworder" class="tab-pane active">
-          <div class="panel">
-              <div class="panel-heading">Danh Sách Đơn Hàng</div>
+          <div class="panel panel-warning">
+              <div class="panel-heading"><b>Danh Sách Đơn Hàng</b></div>
               <div class='panel-body'>
                 <div class="table-reposive">      
                   <table class='table table-hover'>
@@ -93,8 +93,8 @@
 
       <!-- Tab đơn hàng được xác nhận -->
       <div id="orderconfirm" class="tab-pane">
-          <div class="panel">
-              <div class="panel-heading">Danh Sách Đơn Hàng</div>
+          <div class="panel panel-primary">
+              <div class="panel-heading"><b>Danh Sách Đơn Hàng</b></div>
               <div class='panel-body'>
                 <div class="table-reposive">      
                   <table class='table table-hover'>
@@ -166,8 +166,8 @@
 
       <!-- Tab vận chuyển -->
       <div id="deliver" class="tab-pane">
-          <div class="panel">
-              <div class="panel-heading">Danh Sách Đơn Hàng</div>
+          <div class="panel panel-success">
+              <div class="panel-heading"><b>Danh Sách Đơn Hàng</b></div>
               <div class='panel-body'>
                 <div class="table-reposive">      
                   <table class='table table-hover'>

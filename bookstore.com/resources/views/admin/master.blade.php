@@ -33,7 +33,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <b>{{ config('app.name', 'Laravel') }}</b>
                     </a>
                 </div>
 
@@ -41,10 +41,10 @@
                     <!-- Left Side Of Navbar -->
                     @if(Auth::check())
                     <ul class="nav navbar-nav">
-                      <a class='navbar-brand' href="{{route('admin.user')}}">Người dùng</a>
-                      <a class='navbar-brand' href="{{route('admin.category')}}">Chuyên mục</a>
-                      <a class='navbar-brand' href="{{route('admin.product')}}">Sản phẩm</a>
-                      <a class='navbar-brand' href="{{route('admin.order')}}">Đơn hàng</a>
+                      <a class='navbar-brand' href="{{route('admin.user')}}"><b>Người dùng</b></a>
+                      <a class='navbar-brand' href="{{route('admin.category')}}"><b>Chuyên mục</b></a>
+                      <a class='navbar-brand' href="{{route('admin.product')}}"><b>Đầu sách</b></a>
+                      <a class='navbar-brand' href="{{route('admin.order')}}"><b>Đơn hàng</b></a>
                     </ul>
                     @endif
                     <!-- Right Side Of Navbar -->

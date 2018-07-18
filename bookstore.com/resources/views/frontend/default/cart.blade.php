@@ -54,7 +54,7 @@
 
         <div class="col-xs-12 col-md-3 no-margin sidebar ">
             <div class="widget cart-summary">
-                <h1 class="border">shopping cart</h1>
+                <h1 class="border">Giỏ hàng</h1>
                 <div class="body">
                     {{--  <ul class="tabled-data no-border inverse-bold">
                         <li>
@@ -68,13 +68,13 @@
                     </ul>  --}}
                     <ul id="total-price" class="tabled-data inverse-bold no-border">
                         <li>
-                            <label>order total</label>
+                            <label>Tổng cộng</label>
                             <div class="value pull-right">{{$sumPrice}} Đ</div>
                         </li>
                     </ul>
                     <div class="buttons-holder">
-                        <a class="le-button big" href="http://localhost/~ibrahim/themeforest/HTML/mediacenter/upload/PHP/checkout" >checkout</a>
-                        <a class="simple-link block" href="http://localhost/~ibrahim/themeforest/HTML/mediacenter/upload/PHP/home" >continue shopping</a>
+                        <a class="le-button big" href="{{route('frontend.checkout.index')}}">Đặt hàng</a>
+                        <a class="simple-link block" href="{{route('frontend.home.index')}}" >continue shopping</a>
                     </div>
                 </div>
             </div><!-- /.widget -->

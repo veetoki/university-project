@@ -1,11 +1,11 @@
 @extends('frontend.default.master')
 @section('content')
-<div class="container">
+<div class="container" style="padding-top: 2%">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Thông tin khách hàng
+                        <b>Thông tin khách hàng</b>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -43,7 +43,7 @@
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        Thông tin sản phẩm
+                        <b>Thông tin sản phẩm</b>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -51,9 +51,9 @@
                                 <thead>
                                     <tr>
                                         <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Giá tiền</th>
-                                        <th>Thành tiền</th>
+                                        <th style="text-align: center">Số lượng</th>
+                                        <th style="text-align: center">Giá tiền</th>
+                                        <th style="text-align: center">Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,9 +80,9 @@
                                                     <a class="text-dark" href="{{route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id])}}">{{$product->name}}</a>
                                                 </div>                                
                                             </td>
-                                            <td>{{$product->pivot->quantity}}</td>
-                                            <td>{{get_currency_vn($product->sale_price)}}</td>
-                                            <td><strong>{{get_currency_vn($subtotal)}}</strong></td>
+                                            <td style="text-align : center; vertical-align: middle;">{{$product->pivot->quantity}}</td>
+                                            <td style="text-align : center; vertical-align: middle;">{{get_currency_vn($product->sale_price)}}</td>
+                                            <td style="text-align : center; vertical-align: middle;"><strong>{{get_currency_vn($subtotal)}}</strong></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

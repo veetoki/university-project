@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <div class="col-md-12">
-    <div class="panel">
+    <div class="panel panel-primary">
     <div class="panel-heading">Cập Nhật Người Dùng</div>
     <div class='panel-body'>
       <form action="{{route('admin.user.update',['id'=>$user->id])}}" method='POST'>

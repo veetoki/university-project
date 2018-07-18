@@ -121,8 +121,8 @@
                         </ul>
                     </li>  --}}
                     @if(!Auth::check())
-                        <li><a href="{{route('frontend.login')}}">Register</a></li>
-                        <li><a href="{{route('frontend.login')}}">Login</a></li>
+                        <li><a href="{{route('frontend.login')}}">Đăng ký</a></li>
+                        <li><a href="{{route('frontend.login')}}">Đăng nhập</a></li>
                     @else
                     <li class="dropdown">
                             Xin chào,<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -130,7 +130,7 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('frontend.home.orderHistory', ['id' => Auth::user()->id]) }}">Lịch sử đặt hàng</a></li> 
+                                <li><a href="{{route('frontend.home.orderHistory', ['id' => Auth::user()->id]) }}">Quản lý đơn hàng</a></li> 
                                 <li>
                                     <a href="{{ route('frontend.logout') }}"
                                         onclick="event.preventDefault();
@@ -207,7 +207,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder no-margin">
                 <div class="contact-row">
                     <div class="phone inline">
-                        <i class="fa fa-phone"></i> (+800) 123 456 7890
+                        <i class="fa fa-phone"></i> (028) 5445 7777 
                     </div>
                     <div class="contact inline">
                         <i class="fa fa-envelope"></i> contact@<span class="le-color">bookstore.com</span>
@@ -253,7 +253,7 @@
                                 </div>
 
                                 <div class="total-price-basket">
-                                    <span class="lbl">your cart:</span>
+                                    <span class="lbl"><b>Giỏ hàng:</b></span>
                                     <span class="total-price">
                                         <span class="value" v-text="sumPrice">0</span><span class="sign"> Đ</span>
                                     </span>
@@ -339,7 +339,7 @@
             </nav>
         @endif
     </header>
-    <br>
+    
     {{-- Content --}}
     @yield('content')
     {{-- End Content --}}
@@ -617,15 +617,15 @@
                             </svg> --}}
                         </div><!-- /.footer-logo -->
 
-                        <p class="regular-bold"> Feel free to contact us via phone,email or just send us mail.</p>
+                        <p class="regular-bold"> Xin hãy liên lạc với chúng tôi qua số điện thoại hoặc email.</p>
 
                         <p>
-                            17 Princess Road, London, Greater London NW1 8JR, UK
-                            1-888-8MEDIA (1-888-892-9953)
+                            475A Điện Biên Phủ, P.25, Q.Bình Thạnh, TP.HCM 
+                            (028) 5445 7777 
                         </p>
 
                         <div class="social-icons">
-                            <h3>Get in touch</h3>
+                            <h3>Liên lạc</h3>
                             <ul>
                                 <li><a href="http://facebook.com/transvelo" class="fa fa-facebook"></a></li>
                                 <li><a href="#" class="fa fa-twitter"></a></li>
@@ -645,49 +645,53 @@
                     <!-- ============================================================= LINKS FOOTER ============================================================= -->
                     <div class="link-widget">
                         <div class="widget">
-                            <h3>Find it fast</h3>
+                            <h3>Tìm kiếm nhanh</h3>
                             <ul>
-                                <li><a href="category-grid.html">laptops &amp; computers</a></li>
-                                <li><a href="category-grid.html">Cameras &amp; Photography</a></li>
+                                @if (count($categories[0] > 0))
+                                    @foreach ($categories[0] as $category)
+                                        @if ($category->id !== 1)
+                                            <li><a href="#">{{$category->name}}</a></li>
+                                        @endif
+                                    @endforeach
+                                @endif
+                                {{--  <li><a href="category-grid.html">Cameras &amp; Photography</a></li>
                                 <li><a href="category-grid.html">Smart Phones &amp; Tablets</a></li>
                                 <li><a href="category-grid.html">Video Games &amp; Consoles</a></li>
+                                <li><a href="category-grid.html">laptops &amp; computers</a></li>
                                 <li><a href="category-grid.html">TV &amp; Audio</a></li>
                                 <li><a href="category-grid.html">Gadgets</a></li>
                                 <li><a href="category-grid.html">Car Electronic &amp; GPS</a></li>
-                                <li><a href="category-grid.html">Accesories</a></li>
+                                <li><a href="category-grid.html">Accesories</a></li>  --}}
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->
 
                     <div class="link-widget">
                         <div class="widget">
-                            <h3>Information</h3>
+                            <h3>Thông tin thêm</h3>
                             <ul>
-                                <li><a href="category-grid.html">Find a Store</a></li>
-                                <li><a href="category-grid.html">About Us</a></li>
-                                <li><a href="category-grid.html">Contact Us</a></li>
-                                <li><a href="category-grid.html">Weekly Deals</a></li>
-                                <li><a href="category-grid.html">Gift Cards</a></li>
-                                <li><a href="category-grid.html">Recycling Program</a></li>
-                                <li><a href="category-grid.html">Community</a></li>
-                                <li><a href="category-grid.html">Careers</a></li>
-
+                                <li><a href="#">Vị trí cửa hàng</a></li>
+                                <li><a href="#">Về cửa hàng</a></li>
+                                <li><a href="#">Liên lạc với chứng tôi</a></li>
+                                <li><a href="#">Giảm giá hàng tuần</a></li>
+                                <li><a href="#">Cộng đồng</a></li>
+                                <li><a href="#">Công việc</a></li>
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->
 
                     <div class="link-widget">
                         <div class="widget">
-                            <h3>Information</h3>
+                            <h3>Khách hàng</h3>
                             <ul>
-                                <li><a href="category-grid.html">My Account</a></li>
-                                <li><a href="category-grid.html">Order Tracking</a></li>
-                                <li><a href="category-grid.html">Wish List</a></li>
-                                <li><a href="category-grid.html">Customer Service</a></li>
-                                <li><a href="category-grid.html">Returns / Exchange</a></li>
-                                <li><a href="category-grid.html">FAQs</a></li>
-                                <li><a href="category-grid.html">Product Support</a></li>
-                                <li><a href="category-grid.html">Extended Service Plans</a></li>
+                                <li><a href="#">Tài khoản của tôi</a></li>
+                                <li><a href="#">Quản lý đơn hàng</a></li>
+                                <li><a href="#">Danh sách ưa thích</a></li>
+                                <li><a href="#">Dịch vụ khách hàng</a></li>
+                                <li><a href="#">Chính sách đổi / trả</a></li>
+                                <li><a href="#">Câu hỏi thường gặp</a></li>
+                                <li><a href="#">Hỗ trợ sản phẩm</a></li>
+                                <li><a href="#">Các dịch vụ mở rộng</a></li>
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->

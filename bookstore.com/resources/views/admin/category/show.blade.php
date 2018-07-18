@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
   <div class="col-md-12">
-    <div class="panel">
-    <div class="panel-heading">Cập nhật Chuyên Mục</div>
+    <div class="panel panel-primary">
+    <div class="panel-heading"><b>Cập nhật Chuyên Mục</b></div>
     <div class='panel-body'>
       <form action="{{route('admin.category.update', ['id' => $category->id])}}" method="post">
         {{csrf_field()}}
@@ -36,7 +36,7 @@
       {{$errors->first('parent')}}
     </small>
   </div>
-  <button type="submit" class="btn btn-primary">Tạo</button>
+  <button type="submit" class="btn btn-primary"><b>Tạo</b></button>
       </form>
     </div>
 

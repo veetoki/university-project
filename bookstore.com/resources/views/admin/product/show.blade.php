@@ -1,21 +1,21 @@
 @extends('admin.master') @section('content')
 <div class="container">
     <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading">Cập Nhật Sản Phẩm</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><b>Cập Nhật Sản Phẩm</b></div>
             <div class='panel-body'>
                 <form action="{{route('admin.product.update', ['id' => $product->id])}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}} {{method_field('put')}}
                     <div class="form-group {{$errors->has('name') ? 'has-error' : '' }}">
-                        <label for="InputName">Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="InputName" name="name" value="{{$product->name}}" placeholder="Nhập vào sản phẩm">
+                        <label for="InputName">Tên đầu sách</label>
+                        <input type="text" class="form-control" id="InputName" name="name" value="{{$product->name}}" placeholder="Nhập vào tên đầu sách">
                         <small id="nameHelpBlock" class="form-text text-muted text-danger">
                             {{$errors->first('name')}}
                         </small>
                     </div>
                     <div class="form-group {{$errors->has('code') ? 'has-error' : '' }}">
-                        <label for="InputCode">Mã sản phẩm</label>
-                        <input type="text" class="form-control" id="InputCode" name="code" value="{{$product->code}}" placeholder="Nhập vào mã sản phẩm">
+                        <label for="InputCode">Mã SKU</label>
+                        <input type="text" class="form-control" id="InputCode" name="code" value="{{$product->code}}" placeholder="Nhập vào mã SKU">
                         <small id="nameHelpBlock" class="form-text text-muted text-danger">
                             {{$errors->first('code')}}
                         </small>
@@ -140,7 +140,7 @@
                     <div id="qh-app" class="form-group">
                         <qh-attributes></qh-attributes>
                     </div>
-                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                    <button type="submit" class="btn btn-primary"><b>Cập Nhật</b></button>
                 </form>
             </div>
         </div>

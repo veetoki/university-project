@@ -5,13 +5,13 @@
             <div class="col-md-12">
                 <div>
                     <a href="{{route('admin.order')}}" class="btn btn-primary">
-                        Danh sách đơn hàng
+                        <b>Danh sách đơn hàng</b>
                     </a>
                 </div>
                 <br>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Thông tin khách hàng
+                        <b>Thông tin khách hàng</b>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -49,7 +49,7 @@
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        Thông tin sản phẩm
+                        <b>Thông tin sản phẩm</b>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

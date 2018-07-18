@@ -1,6 +1,6 @@
 @extends('frontend.default.master')
 @section('content')
-<div class="container">
+<div class="container" style="padding-top: 2%">
     <div class="row">
         <form action="{{route('frontend.home.productIndex')}}" method="get" id="orderby">
             @if ($keyword = Request::input('search'))

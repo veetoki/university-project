@@ -12,10 +12,10 @@
                             @foreach ($categories[0] as $category)
                                 @if ($category->id !== 1)
                                 <ul class="nav">
-                                        <li class="dropdown  dropright">
+                                        <li class="dropdown menu-item">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{$category->name}}</a>
                                             @if (isset($category->id))
-                                                <ul class="dropdown-menu">
+                                                <ul class="dropdown-menu mega-menu">
                                                         <li class="yamm-content">
                                                             <div class="row">
                                                                 @foreach ($categories[$category->id] as $childCategory)
@@ -540,16 +540,16 @@
         </div><!-- /.container -->
     </section><!-- /#bestsellers -->
     @endif
-    {{--  {{dd($recent_products)}}  --}}
+    {{--  {{dd($recent_products === [])}}  --}}
     <!-- ========================================= BEST SELLERS : END ========================================= -->
     <!-- ========================================= RECENTLY VIEWED ========================================= -->
-    @if($recent_products !== null)
+    @if($recent_products->isNotEmpty())
     <section id="recently-reviewd" class="wow fadeInUp">
         <div class="container">
             <div class="carousel-holder hover">
 
                 <div class="title-nav">
-                    <h2 class="h1">Recently Viewed</h2>
+                    <h2 class="h1">Sách bạn đã xem</h2>
                     <div class="nav-holder">
                         <a href="#prev" data-target="#owl-recently-viewed"
                            class="slider-prev btn-prev fa fa-angle-left"></a>

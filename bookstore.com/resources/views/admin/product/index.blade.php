@@ -9,26 +9,26 @@
     <div class = "alert alert-danger">{{session('error')}}</div>
   @endif
     <div>
-      <a href="{{route('admin.product.create')}}" class='btn btn-primary'>Tạo Sản Phẩm</a>
+      <a href="{{route('admin.product.create')}}" class='btn btn-primary'><b>Tạo Đầu Sách</b></a>
     </div>
     <br>
-    <div class="panel">
-    <div class="panel-heading">Danh Sách Sản Phẩm</div>
+    <div class="panel panel-info">
+    <div class="panel-heading"><b>Danh Sách Đầu Sách</b></div>
     <div class='panel-body'>
       <div class="table-reposive">      
         <table class='table table-hover'>
         <thead class='thead-dark'>
           <tr>
             <th scope='row'>#</th>
-            <th scope='row'>Tên</th>
-            <th scope='row'>Mã</th>
+            <th scope='row'>Tên sách</th>
+            <th scope='row'>Mã SKU</th>
             <th scope="row">Tác giả</th>
             <th scope='row'>Giá bán</th>
             <th scope='row'>Số lượng</th>
             <th scope='row' >Hình ảnh</th>
             <th scope='row' >Người đăng</th>
             <th scope='row'>Ngày cập nhật</th>
-            <th scope='row' style="min-width: 150px">Chức năng</th>
+            <th scope='row' style="min-width: 150px">Tùy chọn</th>
           </tr>
         </thead>
 
@@ -72,7 +72,7 @@
             </tr>
           @empty
             <tr>
-              <td colspan="8">Không có dữ liệu</td>
+              <td colspan="8"><b>Không có dữ liệu</b></td>
             </tr>
           @endforelse
         </tbody>

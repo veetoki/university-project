@@ -1,7 +1,7 @@
 @extends('frontend.default.master')
 @section('content')
 
-<div class="container col-md-12">
+<div class="container col-md-12" style="padding-top: 2%">
     <div class="panel panel-default">
         <div class="panel-heading">Đơn Hàng của tôi</div>
         <div class='panel-body'>
@@ -23,7 +23,7 @@
                   <td scope='row'><a href="{{route('frontend.home.orderDetail', ['id' => $order->id])}}">{{$order->id}}</a></td>
                   <td>{{$order->created_at}}</td>
                   <td>{{$productsName[$order->id]}}</td>
-                  <td>{{$ordersTotal[$order->id]}}</td>
+                  <td>{{get_currency_vn($ordersTotal[$order->id])}}</td>
                   @switch($order->status)
                       @case(1)
                         <td class="text-info">Đã xác nhận</td>

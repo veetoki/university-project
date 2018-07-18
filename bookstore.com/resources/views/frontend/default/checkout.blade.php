@@ -5,12 +5,12 @@
         <div class="col-xs-12 no-margin">
             
             <div class="billing-address">
-                <h2 class="border h1">billing address</h2>
+                <h2 class="border h1">Địa chỉ nhận hàng</h2>
                 <form id="billingInfo" method="POST" action="{{route('frontend.checkout.placeOrder')}}">
                     {{csrf_field()}}
                     <div class="row field-row">
                         <div class="col-xs-12 col-sm-6" {{$errors->has('name') ? 'has-errors' : ''}}>
-                            <label>full name*</label>
+                            <label>Họ tên của bạn</label>
                             <input class="le-input" name="name" value="{{old('name')}}">
                             <small id="nameHelpBlock" class="form-text text-muted text-danger">
                                 {{$errors->first('name')}}
@@ -24,8 +24,8 @@
 
                     <div class="row field-row">
                         <div class="col-xs-12 col-sm-6" {{$errors->has('address') ? 'has-errors' : ''}}>
-                            <label>address*</label>
-                            <input class="le-input" placeholder="street address" name="address" value="{{old('address')}}">
+                            <label>Địa chỉ</label>
+                            <input class="le-input" name="address" value="{{old('address')}}">
                             <small id="nameHelpBlock" class="form-text text-muted text-danger">
                                 {{$errors->first('address')}}
                             </small>
@@ -36,7 +36,7 @@
                     <div class="row field-row">
         
                         <div class="col-xs-12 col-sm-6" {{$errors->has('email') ? 'has-errors' : ''}}>
-                            <label>email address*</label>
+                            <label>Email</label>
                             <input class="le-input" name="email" value="{{old('email')}}">
                             <small id="nameHelpBlock" class="form-text text-muted text-danger">
                                 {{$errors->first('email')}}
@@ -48,7 +48,7 @@
 
                     <div class="row field-row">
                         <div class="col-xs-12 col-sm-6" {{$errors->has('phonenumber') ? 'has-errors' : ''}}>
-                            <label>phone number*</label>
+                            <label>Số điện thoại</label>
                             <input class="le-input" name="phonenumber" value="{{old('phonenumber')}}">
                             <small id="nameHelpBlock" class="form-text text-muted text-danger">
                                 {{$errors->first('phonenumber')}}
@@ -80,7 +80,7 @@
 
 
             <section id="your-order">
-                <h2 class="border h1">your order</h2>
+                <h2 class="border h1">Đơn hàng của bạn</h2>
                 <form>
                     
                     @foreach ($products as $product)
@@ -88,10 +88,16 @@
                             <div class="col-xs-12 col-sm-1 no-margin">
                                 <a href="#" class="qty">{{$product['quantity']}} x</a>
                             </div>
-    
+                            
+                            {{--  <div class="col-xs-12 col-sm-1">
+                                <a href="#" class="thumb-holder">
+                                    <img class="lazy" alt="" src="{{$product['image']}}" />
+                                </a>
+                            </div>  --}}
+            
                             <div class="col-xs-12 col-sm-9 ">
                                 <div class="title"><a href="#">{{$product['name']}}</a></div>
-                                <div class="brand">{{$product['code']}}</div>
+                                <div class="brand">{{$product['author']}}</div>
                             </div>
     
                             <div class="col-xs-12 col-sm-2 no-margin">
@@ -123,7 +129,7 @@
 
                         <ul id="total-field" class="tabled-data inverse-bold ">
                             <li>
-                                <label>order total</label>
+                                <label>Tổng cộng</label>
                                 <div class="value">{{number_format($total, 0, ',', '.')}} Đ</div>
                             </li>
                         </ul><!-- /.tabled-data -->

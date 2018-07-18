@@ -1,7 +1,7 @@
 @extends('frontend.default.master') 
 @section('content')
 <!-- ============================================================= HEADER : END ============================================================= -->
-<div id="single-product">
+<div id="single-product"  style="padding-top: 2%">
     <div class="container">
 
         <div class="no-margin col-xs-12 col-sm-6 col-md-5 gallery-holder">
@@ -183,7 +183,7 @@
                         <span class="seperator">/</span>
 
                         <div class="inline">
-                            <label>categories:</label>
+                            <label>Danh mục:</label>
                             <span>
                                 <a href="#">{{$product->category->name}}</a>
                             </span>
@@ -301,7 +301,7 @@
                         <!-- /.comment-item -->
                             
                         @empty
-                            <div>Không có dữ liệu</div>
+                            {{--  <div>Không có dữ liệu</div>  --}}
                         @endforelse
  
                     <div class="add-review row">
@@ -388,7 +388,7 @@
             <div class="carousel-holder hover">
 
                 <div class="title-nav">
-                    <h2 class="h1">Recently Viewed</h2>
+                    <h2 class="h1">Sách bạn đã xem</h2>
                     <div class="nav-holder">
                         <a href="#prev" data-target="#owl-recently-viewed"
                            class="slider-prev btn-prev fa fa-angle-left"></a>

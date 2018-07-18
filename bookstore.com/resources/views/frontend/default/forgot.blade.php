@@ -7,7 +7,7 @@
 			
 			<div class="col-md-6 col-md-offset-3">
 				<section class="section sign-in inner-right-xs">
-					<h2 class="bordered">Thay đổi mật khẩu</h2>
+					<h2 class="bordered">Gửi link thay đổi mật khẩu</h2>
 
 					<form method="POST" action="{{route('frontend.password.email')}}" role="form" class="login-form cf-style-1">
                         {{csrf_field()}}	

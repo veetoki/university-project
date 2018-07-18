@@ -7,10 +7,10 @@
 			
 			<div class="col-md-6">
 				<section class="section sign-in inner-right-xs">
-					<h2 class="bordered">Sign In</h2>
-					<p>Hello, Welcome to your account</p>
+					<h2 class="bordered">Đăng Nhập</h2>
+					<p>Xin chào, chào mừng bạn</p>
 
-					<div class="social-auth-buttons">
+					{{--  <div class="social-auth-buttons">
 						<div class="row">
 							<div class="col-md-6">
 								<button class="btn-block btn-lg btn btn-facebook"><i class="fa fa-facebook"></i> Sign In with Facebook</button>
@@ -19,7 +19,7 @@
 								<button class="btn-block btn-lg btn btn-twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</button>
 							</div>
 						</div>
-					</div>
+					</div>  --}}
 
 					<form method="POST" action="{{route('frontend.login')}}" role="form" class="login-form cf-style-1">
 						{{csrf_field()}}	
@@ -34,7 +34,7 @@
 						</div><!-- /.field-row -->
 
                         <div class="field-row{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label>Password</label>
+                            <label>Mật khẩu</label>
                             <input id="password" name="password" type="password" class="le-input">
 							@if ($errors->has('password'))
 							<span class="help-block">
@@ -45,15 +45,15 @@
 
                         <div class="field-row clearfix">
                         	<span class="pull-left">
-                        		<label class="content-color"><input name="remember" type="checkbox" class="le-checbox auto-width inline" {{ old('remember') ? 'checked' : '' }}> <span class="bold">Remember me</span></label>
+                        		<label class="content-color"><input name="remember" type="checkbox" class="le-checbox auto-width inline" {{ old('remember') ? 'checked' : '' }}> <span class="bold">Ghi nhớ đăng nhập</span></label>
                         	</span>
                         	<span class="pull-right">
-                        		<a href="{{route('frontend.password.request')}}" class="content-color bold">Forgotten Password ?</a>
+                        		<a href="{{route('frontend.password.request')}}" class="content-color bold">Quên mật khẩu ?</a>
                         	</span>
                         </div>
 
                         <div class="buttons-holder">
-                            <button type="submit" class="le-button huge">Log In</button>
+                            <button type="submit" class="le-button huge">Đăng nhập</button>
                         </div><!-- /.buttons-holder -->
 					</form><!-- /.cf-style-1 -->
 
@@ -62,14 +62,14 @@
 
 			<div class="col-md-6">
 				<section class="section register inner-left-xs">
-					<h2 class="bordered">Create New Account</h2>
-					<p>Create your own Media Center account</p>
+					<h2 class="bordered">Tạo tài khoản mới</h2>
+					<p>Tạo tài khoản Book Store của bạn</p>
 
 					<form method="POST" action="{{route('frontend.register')}}" role="form" class="register-form cf-style-1">
 						{{csrf_field()}}
 
 						<div class="field-row{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label>Name</label>
+                            <label>Họ tên của bạn</label>
 							<input id="name" name="name" type="text" class="le-input">
 							@if ($errors->has('name'))
 							<span class="help-block">
@@ -91,7 +91,7 @@
 						</div><!-- /.field-row -->
 						
 						<div class="field-row{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label>Password</label>
+                            <label>Mật khẩu</label>
 							<input id="password" name="password" type="password" class="le-input">
 							@if ($errors->has('password'))
 							<span class="help-block">
@@ -102,22 +102,22 @@
 						</div><!-- /.field-row -->
 						
 						<div class="field-row">
-                            <label>Password Confirm</label>
+                            <label>Xác nhận mật khẩu</label>
 							<input id="password-confirm" name="password_confirmation" type="password" class="le-input">
 					
                         </div><!-- /.field-row -->
 
                         <div class="buttons-holder">
-                            <button type="submit" class="le-button huge">Sign Up</button>
+                            <button type="submit" class="le-button huge">Đăng Ký</button>
                         </div><!-- /.buttons-holder -->
 					</form>
 
-					<h2 class="semi-bold">Sign up today and you'll be able to :</h2>
+					<h2 class="semi-bold">Đăng ký ngay bây giờ và bạn có thể:</h2>
 
 					<ul class="list-unstyled list-benefits">
-						<li><i class="fa fa-check primary-color"></i> Speed your way through the checkout</li>
-						<li><i class="fa fa-check primary-color"></i> Track your orders easily</li>
-						<li><i class="fa fa-check primary-color"></i> Keep a record of all your purchases</li>
+						<li><i class="fa fa-check primary-color"></i> Mua sắm một cách nhanh chóng</li>
+						<li><i class="fa fa-check primary-color"></i> Theo dõi tình trạng đơn hàng của bạn một cách dễ dàng</li>
+						<li><i class="fa fa-check primary-color"></i> Lưu lại những đầu sách mà bạn đã mua</li>
 					</ul>
 
 				</section><!-- /.register -->
