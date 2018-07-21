@@ -103,8 +103,12 @@ img {
 /* Header */
 
 .header {
+    width:80%;
+    margin-left:10%;
+    margin-right: 10%;
     padding: 25px 0;
     text-align: center;
+    background-color: #f5f8fa;
 }
 
 .header a {
@@ -118,7 +122,7 @@ img {
 /* Body */
 
 .body {
-    background-color: #FFFFFF;
+    background-color: #EDEFF2;
     border-bottom: 1px solid #EDEFF2;
     border-top: 1px solid #EDEFF2;
     margin: 0;
@@ -133,10 +137,10 @@ img {
     background-color: #FFFFFF;
     margin: 0 auto;
     padding: 0;
-    width: 570px;
+    width: 80%;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
-    -premailer-width: 570px;
+    -premailer-width: 80%;
 }
 
 /* Subcopy */
@@ -156,11 +160,12 @@ img {
 .footer {
     margin: 0 auto;
     padding: 0;
+    background-color: #f5f8fa;
     text-align: center;
-    width: 570px;
+    width: 80% !important;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
-    -premailer-width: 570px;
+    -premailer-width: 80% !important;
 }
 
 .footer p {
@@ -183,6 +188,8 @@ img {
     border-bottom: 1px solid #EDEFF2;
     padding-bottom: 8px;
     margin: 0;
+    color: white;
+    background-color:darkturquoise;
 }
 
 .table td {

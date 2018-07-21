@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Order;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderShipped;
 class OrderController extends Controller
 {
     public function __construct() {
@@ -50,6 +52,9 @@ class OrderController extends Controller
           case 1:
             $order->status = 2;
             $message = "Đơn hàng <a href='".route('admin.order')."#deliver'>#$order->id</a> đã được vận chuyển";
+            // Gửi mail
+            Mail::to($order->email)
+                ->queue(new OrderShipped($order));
             break;
           default:
             break;

@@ -49,6 +49,9 @@ use App\Category;
         }
         public function deleteCart(Request $request, $id)
         {
+            if ($id === null) {
+                $id = $request->input('id');
+            }
             $cartDecode = Cookie::has('cart') ? json_decode($request->cookie('cart') , true) : null;
             $cart = is_array($cartDecode) ? $cartDecode : [];
             if (isset($cart[$id])) {
@@ -57,6 +60,18 @@ use App\Category;
             $cookie = cookie('cart', json_encode($cart), 720);
             return redirect()->route('frontend.cart.index')->cookie($cookie);
         }
+        public function deleteEach(Request $request)
+        {
+            $id = $request->input('id');
+            $cartDecode = Cookie::has('cart') ? json_decode($request->cookie('cart') , true) : null;
+            $cart = is_array($cartDecode) ? $cartDecode : [];
+            if (isset($cart[$id])) {
+                unset($cart[$id]);
+            }
+            $cookie = cookie('cart', json_encode($cart), 720);
+            return redirect()->route('api.cart.getCart')->cookie($cookie);
+        }
+
         public function deleteAll()
         {
             $cookie = cookie('cart', null, 720);
@@ -91,8 +106,15 @@ use App\Category;
                     $sumPrice += $value['quantity'] * $value['price'];
                 }
             }
+    
             return response()->json([
-                'message' => 'Đã thêm vào giỏ hàng thành công',
+                'message' => "
+                            <div id='message' class='col-md-3 alert alert-success fade in'>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                                <p>Bạn đã thêm ".$request->input('quantity')." x <a class='alert-link' href='".route('frontend.home.show',['slug' => str_slug($product->name), 'id' => $id])."'>$product->name</a> vào giỏ hàng.</p>
+                            </div>",
                 'total' => count($cart),
                 'sumPrice' => number_format($sumPrice, 0, ',', '.'),
                 'cart' => $cart

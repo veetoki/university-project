@@ -7,7 +7,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Order;
-class OrderConfirmation extends Mailable
+
+class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,8 +31,8 @@ class OrderConfirmation extends Mailable
     public function build()
     {
         return $this->from('orderconfirm@bookstore.com')
-                    ->subject("Xác nhận đơn hàng #".$this->order->id)
-                    ->markdown('mails.order-confirmation')
+                    ->subject("Đơn hàng #".$this->order->id." đã sẵn sàng giao đến quý khách")
+                    ->markdown('mails.order-shipped')
                     ->with([
                         'order' => $this->order,
                         'products' => $this->order->products

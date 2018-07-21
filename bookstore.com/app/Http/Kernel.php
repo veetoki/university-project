@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\CheckRoles;
+use App\Http\Middleware\CheckUser;
 
 class Kernel extends HttpKernel
 {
@@ -62,5 +63,6 @@ class Kernel extends HttpKernel
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'checkRoles' => CheckRoles::class,
+        'checkUser' => CheckUser::class,
     ];
 }

@@ -12,6 +12,7 @@ use App\Category;
 use Illuminate\Support\Facades\View;
 use App\Order;
 use App\User;
+use Illuminate\Routing\Route;
 class HomeController extends Controller
 {
     /**
@@ -156,7 +157,7 @@ class HomeController extends Controller
         return $newArr;
     }
 
-    public function orderHistory($id)
+    public function orderHistory(Request $request,$id)
     {
         $total = 0;
         $ordersId = User::find($id)->orders()->pluck('id');

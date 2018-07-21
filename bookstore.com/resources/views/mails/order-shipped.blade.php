@@ -1,11 +1,20 @@
 @component('mail::message') 
-<img src="{{URL::to('public/themes/default/assets/images/logo.svg')}}" alt="">
-<h2>Cảm ơn quý khách {{$order->name}} đã đặt hàng tại Bookstore.com,</h2> 
+<h2>Đơn hàng #{{$order->id}} đã sẵn sàng để giao đến quý khách {{$order->name}}</h2> 
 <p>
-    Bookstore.com rất vui thông báo đơn hàng #{{$order->id}} của quý khách đã được tiếp nhận và đang trong quá trình xử lý.
-    Tiki sẽ thông báo đến quý khách ngay khi hàng chuẩn bị được giao.
+        Chúng tôi vừa bàn giao đơn hàng của quý khách đến đối tác vận chuyển. 
+        Đơn hàng của quý khách sẽ được giao trong ngày hôm nay {{date('d/m/Y')}}
 </p>
-@php $total = 0; 
+
+@if($order->id !== null)
+@php
+    $url = route('frontend.user.home.orderHistory', ['id' => $order->user_id]);
+@endphp
+@component('mail::button', ['url' => $url, 'color' => 'blue'])
+Xem chi tiết đơn hàng
+@endcomponent
+@endif
+@php 
+    $total = 0; 
 @endphp
 <div>
     <h3 style="color:darkturquoise">
@@ -37,9 +46,6 @@
     <div>
         <label><b>Pương thức thanh toán:</b></label> Thanh toán tiền mặt khi nhận hàng 
     </div>
-    <div>
-        <label><b>Thời gian giao hàng dự kiến:</b></label> dự kiến giao hàng vào {{date('d/m/Y',strtotime($order->created_at->addDays(2)))}} 
-    </div>
 </div>
 <br>
 <div>
@@ -62,15 +68,6 @@
     </div>
 </div>
 <br> 
-@if($order->user_id !== null)
-    @php
-        $url = route('frontend.user.home.orderDetail', ['id' => $order->user_id]);
-    @endphp
-@component('mail::button', ['url' => $url, 'color' => 'blue'])
-Xem chi tiết đơn hàng
-@endcomponent
-@endif
-
-<b>Một lần nữa bookstore.com cảm ơn quý khách.</b>
+<b>Một lần nữa bookstore.com cảm ơn quý khách,</b>
 <div><h3 style="text-align:right; color:#3498db;">Bookstore.com</h3></div> 
 @endcomponent

@@ -48,6 +48,7 @@
 </head>
 <body>
 <div class="wrapper" id="app">
+    <div class="message-container" v-html="alert"></div>        
     <!-- ============================================================= TOP NAVIGATION ============================================================= -->
     <nav class="top-bar animate-dropdown">
         <div class="container">
@@ -130,7 +131,7 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('frontend.home.orderHistory', ['id' => Auth::user()->id]) }}">Quản lý đơn hàng</a></li> 
+                                <li><a href="{{route('frontend.user.home.orderHistory', ['id' => Auth::user()->id]) }}">Quản lý đơn hàng</a></li> 
                                 <li>
                                     <a href="{{ route('frontend.logout') }}"
                                         onclick="event.preventDefault();
@@ -275,7 +276,7 @@
                                                 <div class="price" v-text="product['quantity'] + ' x ' + product['price'] + ' Đ'"></div>
                                             </div>
                                         </div>
-                                        <a class="close-btn" href="#"></a>
+                                        <a class="close-btn" href="/delete" v-on:click="deleteEach($event,key)"></a>
                                     </div>
                                 </li>
 
@@ -761,6 +762,8 @@
             total: 0,
             sumPrice: 0,
             quantity: 1,
+            alert: '',
+            message: false,
         },
         methods: {
             addToCart: function(id , event, isSingleProduct){
@@ -774,11 +777,14 @@
                       id: id,
                       quantity: vm.quantity
                     }).then(function(response){
-                        console.log(response);
                         vm.cart = response && response.data && response.data.cart;
                         vm.total = response && response.data && response.data.total;
                         vm.sumPrice = response && response.data && response.data.sumPrice;
+                        vm.alert = response && response.data && response.data.message;
                     });
+                    setTimeout(function(){
+                        $('.close').alert('close');
+                    },3000);
             },
             getCart: function(){
                 var vm = this;
@@ -788,6 +794,24 @@
                         vm.total = response && response.data && response.data.total;
                         vm.sumPrice = response && response.data && response.data.sumPrice;
                     })
+            },
+            deleteEach: function(event,id){
+                var vm = this;
+                event.preventDefault();
+                axios.get('{{route("api.cart.deleteEach")}}',
+                {
+                    params: {
+                        id: id
+                    }
+                }).then(function(response){
+                    vm.cart = response && response.data && response.data.cart;
+                    vm.total = response && response.data && response.data.total;
+                    vm.sumPrice = response && response.data && response.data.sumPrice;    
+                });
+                
+                if({{Route::current()->getName() === 'frontend.cart.index' ? '1' : '0'}}){
+                    window.location.replace('{{URL::to('/')}}');
+                }
             },
             addQuantity: function(){
                 this.quantity += 1;

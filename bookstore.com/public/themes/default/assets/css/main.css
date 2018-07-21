@@ -4964,3 +4964,10 @@ select.top-drop-menu {
     display: block;
   }
 }
+
+#message{
+  top:0;
+  right:0;
+  z-index: 999;
+  position: fixed;
+}

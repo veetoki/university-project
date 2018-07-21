@@ -70,14 +70,15 @@ Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 
             'slug' => '[a-z-]+',
             'id' => '[0-9]+'
           ]);
-
-  Route::get('/orderHistory/{id}','HomeController@orderHistory')->name('home.orderHistory');
-  Route::get('/orderDetail/{id}','HomeController@orderDetail')->name('home.orderDetail');
+  Route::name('user.')->middleware('auth','checkUser')->group(function() {
+    Route::get('/orderHistory/{id}','HomeController@orderHistory')->name('home.orderHistory');
+    Route::get('/orderDetail/{id}','HomeController@orderDetail')->name('home.orderDetail');  
+  });
 
   Route::get('/cart','CartController@index')->name('cart.index');
   Route::post('/cart','CartController@updateCart')->name('cart.updateCart');
   Route::get('/cart/{id}/delete','CartController@deleteCart')->name('cart.deleteCart');
-  Route::get('/cart/delete','CartController@deleteAll')->name('cart.deleteAll');
+  Route::get('/cart//delete','CartController@deleteAll')->name('cart.deleteAll');
 
   Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
   Route::post('/checkout', 'CheckoutController@placeOrder')->name('checkout.placeOrder');
@@ -88,5 +89,5 @@ Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 
 Route::prefix('/api')->name('api.')->namespace('Frontend')->group(function(){
   Route::get('/cart','CartController@getCart')->name('cart.getCart');
   Route::post('/cart','CartController@addToCart')->name('cart.addToCart');
-  
+  Route::get('/deleteEach','CartController@deleteEach')->name('cart.deleteEach');
 });
