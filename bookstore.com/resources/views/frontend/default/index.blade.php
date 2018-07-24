@@ -8,6 +8,12 @@
                 <div class="side-menu animate-dropdown">
                     <div class="head"><i class="fa fa-list"></i><h4 style="display:inline-block">DANH MỤC SÁCH</h4></div>
                     <nav class="yamm megamenu-horizontal" role="navigation">
+                        <ul class="nav">
+                            <li class="dropdown"><a href="{{route('frontend.home.productIndex',['title' => 'products'])}}">Sách mới phát hành</a></li>
+                        </ul>
+                        <ul class="nav">
+                            <li class="dropdown"><a href="{{route('frontend.home.productIndex', ['title' => 'best-sellers'])}}">Sách bán chạy</a></li>
+                        </ul>    
                         @if (count($categories[0]) > 0)
                             @foreach ($categories[0] as $category)
                                 @if ($category->id !== 1)
@@ -21,7 +27,7 @@
                                                                 @foreach ($categories[$category->id] as $childCategory)
                                                                 {{--  <div class="col-md-4">  --}}
                                                                         <ul class="list-unstyled">
-                                                                            <li><a href="{{route('frontend.home.productIndex',['category' => $childCategory->id])}}">{{$childCategory->name}}</a></li>
+                                                                            <li><a href="{{route('frontend.home.productIndex',['title' => 'products','category' => $childCategory->id])}}">{{$childCategory->name}}</a></li>
                                                                         </ul>
                                                                 {{--  </div>  --}}
                                                                 @endforeach
@@ -174,7 +180,7 @@
                                             @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
                                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                      data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                     alt="Image">
+                                                     alt="Image" width="208" height="300">
                                             @else
                                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                      data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -209,7 +215,7 @@
                             @endforelse
                         </div>
                         <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex')}}">
+                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex',['title' => 'products'])}}">
                                 <i class="fa fa-plus"></i>
                                 Xem thêm</a>
                         </div>
@@ -227,7 +233,7 @@
                                         @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                  data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                 alt="Image">
+                                                 alt="Image" width="208" height="300">
                                         @else
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                  data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -239,7 +245,7 @@
                                         <div class="title">
                                              <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}">{{ $product->name }}</a> 
                                         </div>
-                                        <div class="brand">{{ $product->code }}</div>
+                                        <div class="brand">{{ $product->author }}</div>
                                     </div>
                                     <div class="prices">
                                         <div class="price-prev">{{ number_format($product->regular_price, 0, ',', '.') }}</div>
@@ -262,7 +268,7 @@
                             @endforelse
                         </div>
                         <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex')}}">
+                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex',['title' => 'products'])}}">
                                 <i class="fa fa-plus"></i>
                                 Xem thêm</a>
                         </div>
@@ -398,7 +404,7 @@
 
                         </div>
                         <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex')}}">
+                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex',['title' => 'products'])}}">
                                 <i class="fa fa-plus"></i>
                                 Xem thêm</a>
                         </div>
@@ -416,11 +422,14 @@
             <div class="product-grid-holder medium">
                 <div class="col-xs-12 col-md-7 no-margin">
                     @php
-                        $count = 0;
+                        $count = -1;
                     @endphp
                         @foreach($best_sellers as $product)
                             @php
                                 $count++;
+                                if($count == 0){
+                                    continue;
+                                }
                             @endphp
                             @if($count === 1 || $count === 4)
                                 <div class="row no-margin">
@@ -431,7 +440,7 @@
                                         @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                             data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                            alt="Image">
+                                            alt="Image" width="208" height="300">
                                         @else
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                             data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -443,10 +452,10 @@
                                         <div class="title">
                                              <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}">{{ $product->name }}</a> 
                                         </div>
-                                        <div class="brand">{{ $product->code }}</div>
+                                        <div class="brand">{{ $product->author }}</div>
                                     </div>
                                     <div class="prices">
-                                        <div class="price-prev"></div>
+                                        <div class="price-prev">{{ number_format($product->regular_price, 0, ',', '.') }}</div>
                                         <div class="price-current pull-right">{{ number_format($product->sale_price, 0, ',', '.') }}</div>
                                     </div>
 
@@ -477,12 +486,12 @@
                         <div id="best-seller-single-product-slider" class="single-product-slider owl-carousel">
                                 @forelse ($product->attachment as $key => $file)
                                 <div class="single-product-gallery-item" id="slide-".{{$key}}>
-                                    @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path,'_450x337'))))
+                                    @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path))))
                                     <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}">
                                         <!--class="img-responsive"--><img  alt="" 
-                                        src="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}" 
-                                        data-echo="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}"
-                                        />
+                                        src="{{ asset('uploads/' . get_thumbnail($file->path)) }}" 
+                                        data-echo="{{ asset('uploads/' . get_thumbnail($file->path)) }}"
+                                        width="308" height="400"/>
                                     </a>
                                     @else
                                     <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image"> <!-- class="img-responsive" -->                        
@@ -496,7 +505,7 @@
                 <!--class="img-responsive"--> <img alt="" 
                                         src="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}" 
                                         data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}"
-                                    />
+                                        width="308" height="400"/>
                                     </a>
                                     @else
                                     <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image"> <!-- class="img-responsive" -->
@@ -525,7 +534,7 @@
                             <div class="title">
                                 <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}">{{ $product->name }}</a> 
                             </div>
-                            <div class="brand">{{$product->code}}</div>
+                            <div class="brand">{{$product->author}}</div>
                         </div>
                         <div class="prices text-right">
                             <div class="price-current inline">{{ number_format($product->sale_price, 0, ',', '.') }}</div>
@@ -564,9 +573,9 @@
                         <div class="product-item">
                             {{-- <div class="ribbon red"><span>sale</span></div> --}}
                             <div class="image">
-                                @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
+                                @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image", "_100x150"))))
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                         data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
+                                         data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_100x150')) }}"
                                          alt="Image">
                                 @else
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"

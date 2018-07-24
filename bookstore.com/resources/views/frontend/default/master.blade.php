@@ -268,7 +268,7 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" v-bind:src="product['image']">
+                                                    <img alt="" v-bind:src="product['image']" width="40" height="60">
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">

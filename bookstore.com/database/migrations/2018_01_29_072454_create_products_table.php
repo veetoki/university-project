@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->string('code')->unique();
             $table->string('author');
+            $table->string('translator')->nullable();
+            $table->string('publisher');
             $table->longtext('summary');
             $table->integer('regular_price')->default(0)->unsigned();
             $table->integer('sale_price')->default(0)->unsigned();

@@ -89,13 +89,13 @@
                                 <a href="#" class="qty">{{$product['quantity']}} x</a>
                             </div>
                             
-                            {{--  <div class="col-xs-12 col-sm-1">
+                            <div class="col-xs-12 col-sm-1">
                                 <a href="#" class="thumb-holder">
-                                    <img class="lazy" alt="" src="{{$product['image']}}" />
+                                    <img class="lazy" alt="" src="{{asset('/uploads/'.$product['image'])}}" width="40" height="60"/>
                                 </a>
-                            </div>  --}}
+                            </div>
             
-                            <div class="col-xs-12 col-sm-9 ">
+                            <div class="col-xs-12 col-sm-8">
                                 <div class="title"><a href="#">{{$product['name']}}</a></div>
                                 <div class="brand">{{$product['author']}}</div>
                             </div>

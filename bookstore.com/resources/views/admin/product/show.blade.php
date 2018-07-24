@@ -69,7 +69,7 @@
                         <label for="InputImage">Hình sản phẩm</label>
                         <div>
                             @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
-                            <img src="{{asset(get_thumbnail("uploads/$product->image"))}}" alt="Image"> 
+                            <img src="{{asset(get_thumbnail("uploads/$product->image",'_100x150'))}}" alt="Image"> 
                             @else
                             <img src="{{asset("images/no_image_thumb.jpg")}}" alt="No Image" class="img-responsive img-thumbnail"> 
                             @endif
@@ -88,7 +88,7 @@
                                     @forelse ($product->attachment as $file)
                                     {{--  {{dd($file->path)}}  --}}
                                         @if (!empty($file->path) && file_exists(public_path(get_thumbnail("uploads/$file->path"))))
-                                        <img src="{{asset(get_thumbnail("uploads/$file->path"))}}" alt="Image"> 
+                                        <img src="{{asset(get_thumbnail("uploads/$file->path",'_100x150'))}}" alt="Image"> 
                                         @else
                                         <img src="{{asset("images/no_image-200x150.jpg")}}" alt="No Image" class="img-responsive img-thumbnail"> 
                                         @endif
@@ -188,12 +188,11 @@
             template: '#qh-attributes-template',
             data: function () {
                 var attributes = null;
-                console.log(attributes);
                 @if($product->attributes)
                     attributes = {!! $product->attributes !!};
                 @endif
-
-                if (attributes === null) {
+                console.log(attributes);
+                if (attributes === null ||attributes.length === 0) {
                     attributes = [{
                         name: '',
                         value: ''

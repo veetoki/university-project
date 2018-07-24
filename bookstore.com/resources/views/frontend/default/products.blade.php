@@ -2,6 +2,10 @@
 @section('content')
 <div class="container" style="padding-top: 2%">
     <div class="row">
+        @if(isset($title))
+            <h1 class="section-title">Sách {{$title}}</h1>
+        @endif
+        <hr style="border-top:2px dashed #eee !important">
         <form action="{{route('frontend.home.productIndex')}}" method="get" id="orderby">
             @if ($keyword = Request::input('search'))
               <input type="hidden" name="search" value="{{$keyword}}">
@@ -34,7 +38,8 @@
                             @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                      data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                     alt="Image">
+                                     alt="Image"
+                                     width="208" height="300"/>
                             @else
                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                      data-echo="{{ asset('images/no_image_thumb.jpg') }}"

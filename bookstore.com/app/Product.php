@@ -52,6 +52,8 @@ class Product extends Model
     'name',
     'code',
     'author',
+    'translator',
+    'publisher',
     'summary',
     'regular_price',
     'sale_price',

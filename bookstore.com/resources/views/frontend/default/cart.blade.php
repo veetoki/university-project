@@ -18,17 +18,18 @@
                     <div class="title">
                         <a href="{{route('frontend.home.show', ['id' => $key, 'slug' => str_slug($product['name'])]) }}">{{$product['name']}}</a>
                     </div>
-                    <div class="brand">sony</div>
+                    <div class="brand">{{$product['author']}}</div>
                 </div> 
 
                 <div class="col-xs-12 col-sm-3 no-margin">
                     <div class="quantity">
                         <div class="le-quantity">
-                            {{-- <form> --}}
+                            {{--  <form>  --}}
                                 <a class="minus" href="#reduce"></a>
-                                <input name="cart[{{$key}}]" readonly="readonly" type="text" value="{{$product['quantity']}}" />
+                                <input id="quantity" name="cart[{{$key}}]" readonly="readonly" type="text" value="{{$product['quantity']}}"/>
+                                <input id="maxQuantity" type="hidden" value="{{$product['totalQuantity']}}" />
                                 <a class="plus" href="#add"></a>
-                            {{-- </form> --}}
+                            {{--  </form>  --}}
                         </div>
                     </div>
                 </div> 
@@ -73,8 +74,8 @@
                         </li>
                     </ul>
                     <div class="buttons-holder">
-                        <a class="le-button big" href="{{route('frontend.checkout.index')}}">Đặt hàng</a>
-                        <a class="simple-link block" href="{{route('frontend.home.index')}}" >continue shopping</a>
+                        <a class="le-button big" href="{{route('frontend.checkout.index')}}">Thanh Toán</a>
+                        <a class="simple-link block" href="{{route('frontend.home.index')}}" >Tiếp tục mua hàng</a>
                     </div>
                 </div>
             </div><!-- /.widget -->

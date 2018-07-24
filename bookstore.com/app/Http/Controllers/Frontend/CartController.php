@@ -88,8 +88,10 @@ use App\Category;
                     if (!array_key_exists($id,$cart)) {
                         $cart[$id] = [
                             'name' => $product->name,
-                            'image' => $product->image ? asset("uploads/$product->image") : asset("images/no_image_80x80.jpg"),
+                            'author' => $product->author,
+                            'image' => $product->image ? asset('uploads/' . get_thumbnail($product->image, '_80x80')) : asset("images/no_image_80x80.jpg"),
                             'price' => $product->sale_price,
+                            'totalQuantity' => $product->quantity,
                             'quantity' => is_numeric($request->input('quantity')) && $request->input('quantity') > 0 ? $request->input('quantity') : 1,
                         ];
                     }else {

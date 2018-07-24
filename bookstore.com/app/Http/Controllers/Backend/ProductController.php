@@ -360,15 +360,16 @@ class ProductController extends Controller
       }
       $image->move(public_path('uploads/' . $folderName), $fileName);
       $imageName = "$folderName/$fileName";
-      $createImage = function ($suffix = '_thumb', $width = 250, $height = 170) use ($fileNameWithTimestamp, $image, $folderName, $fileName) {
+      $createImage = function ($suffix = '_thumb', $width = 208, $height = 300) use ($fileNameWithTimestamp, $image, $folderName, $fileName) {
         $thumbnailFileName = $fileNameWithTimestamp . $suffix . '.' . $image->getClientOriginalExtension();
         Image::make(public_path("uploads/$folderName/$fileName"))
           ->resize($width, $height)
           ->save(public_path("uploads/$folderName/$thumbnailFileName"));
       };
       $createImage();
-      $createImage('_450x337',450,337);
-      $createImage('_80x80',80,80);
+      $createImage('_100x150',100,150);
+      $createImage('_308x400',308,400);
+      $createImage('_40x60',40,60);
     }
     return $imageName;
   }

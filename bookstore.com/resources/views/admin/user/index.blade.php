@@ -36,8 +36,8 @@
               <td>{{$user->email}}</td>
               <td>{{$user->created_at}}</td>
               <td>{{$user->updated_at}}</td>
-              <td><a href="{{route('admin.user.show', ['id'=>$user->id])}}" class='btn btn-primary'><span class='fas fa-edit'></span></a>
-              <a href="{{route('admin.user.delete', ['id'=>$user->id])}}" 
+              <td><a data-toggle='tooltip' title="Chỉnh sửa" href="{{route('admin.user.show', ['id'=>$user->id])}}" class='btn btn-primary'><span class='fas fa-edit'></span></a>
+              <a data-toggle='tooltip' title="Xóa" href="{{route('admin.user.delete', ['id'=>$user->id])}}" 
                 class='btn btn-danger'
                 onclick="event.preventDefault();
                          window.confirm('Bạn có chắc chắn muốn xóa  người dùng {{$user->name}} không?') ? 

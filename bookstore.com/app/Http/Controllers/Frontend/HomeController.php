@@ -44,7 +44,7 @@ class HomeController extends Controller
         //     limit 7'
         // ));
         $data['best_sellers'] = Product::
-        select(Db::raw('id, name, code, sale_price, image, sum(product_order.quantity) as sold'))
+        select(Db::raw('id, name, regular_price, sale_price, author, image, sum(product_order.quantity) as sold'))
         ->join('product_order', 'product_order.product_id', '=' , 'products.id')
         ->groupBy('id')
         ->orderByRaw('sum(quantity) DESC')
@@ -113,7 +113,21 @@ class HomeController extends Controller
 
     public function productIndex(Request $request)
     {
-        $products = Product::orderBy('id', 'desc');
+        if ($request->input('title') == 'products') {
+            $products = Product::orderBy('id', 'desc');
+            $data['title'] = 'mới phát hành';
+        }
+        else if ($request->input('title') == 'best-sellers') {
+            $products = Product::
+            select(Db::raw('id, name, code, sale_price, image, sum(product_order.quantity) as sold'))
+            ->join('product_order', 'product_order.product_id', '=' , 'products.id')
+            ->groupBy('id')
+            ->orderByRaw('sum(quantity) DESC')
+            ->take(7);
+            $data['title'] = 'bán chạy';
+        }else{
+            $products = Product::orderBy('id', 'desc');
+        }
         if ($orderBy = $request->input('orderBy')) {
             switch ($orderBy) {
                 case 'newest':
@@ -141,6 +155,7 @@ class HomeController extends Controller
 
         if ($category = $request->input('category')) {
             $products->where('category_id', $category);
+            $data['title'] = Category::where('id',$request->input('category'))->pluck('name')->first();
         }
         $data['products'] = $products->paginate(20);
         return view('frontend.default.products', $data);

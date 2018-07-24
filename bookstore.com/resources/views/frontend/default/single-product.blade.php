@@ -26,10 +26,12 @@
                     @empty 
                         @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_450x337'))))
                         <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}">
-                            <img class="img-responsive" alt="" 
+                            <img 
+                            {{--  class="img-responsive"   --}}
+                            alt="" 
                             src="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}" 
-                            data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}"
-                            />
+                            data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337'))}}"
+                            width="308" height="400"/>
                         </a>
                         @else
                         <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image" class="img-responsive img-thumbnail"> 
@@ -85,7 +87,7 @@
                 </div>
 
                 <div class="availability">
-                    <label>Availability:</label>
+                    <label>Tình trạng:</label>
                     <span class="{{$product->quantity > 0 ? 'available' : 'not-available'}}">
                             {{$product->quantity > 0 ? 'còn hàng' : 'hết hàng'}}
                     </span>
@@ -98,15 +100,19 @@
                 <div>
                     <label for="">Tác giả:</label> {{$product->author}}
                 </div> 
-                <br>
                 <div>
+                    <label for="">Dịch giả:</label> {{$product->translator}}
+                </div> <div>
+                    <label for="">Nhà xuất bản:</label> {{$product->publisher}}
+                </div> 
+                {{--  <div>
                     @php 
                         $attributeDecode = json_decode($product->attributes,true);
                         $page = $attributeDecode[0]["value"];
                         $namePage = $attributeDecode[0]["name"];
                     @endphp
                     <label for="">{{$namePage}}:</label> {{$page}}
-                </div>  
+                </div>    --}}
                 <div class="social-row">
                     <span class="st_facebook_hcount"></span>
                     <span class="st_twitter_hcount"></span>
@@ -117,9 +123,12 @@
                     <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
                     <a class="btn-add-to-compare" href="#">add to compare list</a>
                 </div> --}}
-
+                @php
+                    $intro = strlen($product->summary) > 400 ? substr($product->summary,0,400)."..." : $product->summary;
+                @endphp
                 <div>
-                    <p>{{$product->summary}}</p>
+                    <label for=""><h4>Giới thiệu:</h4></label>
+                    <p>{{$intro}}</p>
                 </div>
 
                 <div class="prices">
@@ -171,7 +180,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="description">
-                    <p>{{$product->summary}}</p>
+                    <p style="white-space:pre-wrap">{{$product->summary}}</p>
 
                     <div class="meta-row">
                         <div class="inline">
@@ -194,11 +203,13 @@
                         <span class="seperator">/</span>
 
                         <div class="inline">
-                            <label>tag:</label> @foreach ($product->tags as $tag)
+                            <label>tag:</label> 
+                            {{--  @foreach ($product->tags as $tag)
                             <span>
                                 <a href="#">{{$tag->name}}</a>
-                            </span> @endforeach
-
+                            </span> 
+                            @endforeach  --}}
+                            <span><a href="#">{{$product->category->slug}}</a></span>
                         </div>
                         <!-- /.inline -->
                     </div>
@@ -245,11 +256,13 @@
                         <span class="seperator">/</span>
 
                         <div class="inline">
-                            <label>tag:</label> @foreach ($product->tags as $tag)
+                            <label>tag:</label> 
+                            {{--  @foreach ($product->tags as $tag)
                             <span>
                                 <a href="#">{{$tag->name}}</a>
-                            </span> @endforeach
-
+                            </span> 
+                            @endforeach  --}}
+                            <span><a href="#">{{$product->category->slug}}</a></span>
                         </div>
                         <!-- /.inline -->
                     </div>
@@ -403,9 +416,9 @@
                         <div class="product-item">
                             {{-- <div class="ribbon red"><span>sale</span></div> --}}
                             <div class="image">
-                                @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
+                                @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_100x150'))))
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                         data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
+                                         data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_100x150')) }}"
                                          alt="Image">
                                 @else
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"

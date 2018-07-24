@@ -40,8 +40,8 @@
               <td style="text-align: center;">{{$category->parent}}</td>
               <td>{{$category->created_at}}</td>
               <td>{{$category->updated_at}}</td>
-              <td><a href="{{route('admin.category.show', ['id'=>$category->id])}}" class='btn btn-primary'><span class="fas fa-edit"></span></a>
-              <a href="{{route('admin.category.delete', ['id'=>$category->id])}}" 
+              <td><a data-toggle='tooltip' title="Chỉnh sửa" href="{{route('admin.category.show', ['id'=>$category->id])}}" class='btn btn-primary'><span class="fas fa-edit"></span></a>
+              <a data-toggle='tooltip' title="Xóa" href="{{route('admin.category.delete', ['id'=>$category->id])}}" 
                 class='btn btn-danger'
                 onclick="event.preventDefault();
                 window.confirm('Bạn có chắc chắn muốn xóa chuyên mục {{$category->name}} không?') ?

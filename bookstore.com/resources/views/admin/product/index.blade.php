@@ -43,20 +43,20 @@
               <td>{{$product->quantity}}</td>
               <td>
                 @if(!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
-                    <img src="{{ asset(get_thumbnail("uploads/$product->image"))}}" alt="Image" class="img-responsive img-thumbnail">
+                    <img src="{{ asset(get_thumbnail("uploads/$product->image",'_100x150'))}}" alt="Image" class="img-responsive img-thumbnail">
                 @else
                     <img src="{{ asset("images/no_image_thumb.jpg")}}" alt="No Image" class="img-responsive img-thumbnail">
-                  @endif
+                @endif
               </td>
               <td>{{$product->user->name}}</td>
               <td>{{$product->updated_at}}</td>
               <td>
-                  <a href="{{route('admin.product.setFeaturedProduct', ['id'=>$product->id])}}" 
+                  <a data-toggle='tooltip' title="Đặt sách nổi bật" href="{{route('admin.product.setFeaturedProduct', ['id'=>$product->id])}}" 
                       class="btn btn-{{($product->featured_product ? 'success' : 'default')}}"
                       onclick="event.preventDefault();
                       document.getElementById('featured-product-{{$product->id}}').submit();"><i class="fas fa-eye{{($product->featured_product ? '' : '-slash')}}"></i></a>
-              <a href="{{route('admin.product.show', ['id'=>$product->id])}}" class='btn btn-primary'><i class="fas fa-edit"></i></a>
-              <a href="{{route('admin.product.delete', ['id'=>$product->id])}}" 
+              <a data-toggle='tooltip' title="Chỉnh sửa" href="{{route('admin.product.show', ['id'=>$product->id])}}" class='btn btn-primary'><i class="fas fa-edit"></i></a>
+              <a data-toggle='tooltip' title="Xóa" href="{{route('admin.product.delete', ['id'=>$product->id])}}" 
                 class='btn btn-danger'
                 onclick="event.preventDefault();
                 window.confirm('Bạn có chắc chắn muốn xóa chuyên mục {{$product->name}} không?') ?

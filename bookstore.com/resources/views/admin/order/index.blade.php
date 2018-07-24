@@ -55,13 +55,13 @@
                         </td>
                         <td>{{$order->updated_at}}</td>
                         <td>
-                        <a href="{{route('admin.order.changeOrderStatus', ['id'=>$order->id])}}" 
+                        <a data-toggle="tooltip" title="Xác nhận" href="{{route('admin.order.changeOrderStatus', ['id'=>$order->id])}}" 
                            class='btn btn-success' 
                            onclick="event.preventDefault();
                            document.getElementById('change-status-order-{{$order->id}}').submit();"><i class="fas fa-check"></i></a>
                         
-                        <a href="{{route('admin.order.show', ['id'=>$order->id])}}" class='btn btn-primary'><i class="fas fa-info-circle"></i></a>
-                        <a href="{{route('admin.order.delete', ['id'=>$order->id])}}" 
+                        <a data-toggle="tooltip" title="Thông tin đơn hàng" href="{{route('admin.order.show', ['id'=>$order->id])}}" class='btn btn-primary'><i class="fas fa-info-circle"></i></a>
+                        <a data-toggle="tooltip" title="Xóa" href="{{route('admin.order.delete', ['id'=>$order->id])}}" 
                           class='btn btn-danger'
                           onclick="event.preventDefault();
                           window.confirm('Bạn có chắc chắn muốn xóa đơn hàng {{$order->name}} không?') ?
@@ -128,13 +128,13 @@
                         </td>
                         <td>{{$order->updated_at}}</td>
                         <td>
-                        <a href="{{route('admin.order.changeOrderStatus', ['id'=>$order->id])}}" 
+                        <a data-toggle="tooltip" title="Xác nhận" href="{{route('admin.order.changeOrderStatus', ['id'=>$order->id])}}" 
                            class='btn btn-success' 
                            onclick="event.preventDefault();
                            document.getElementById('change-status-order-{{$order->id}}').submit();"><i class="fas fa-check"></i></a>
                         
-                        <a href="{{route('admin.order.show', ['id'=>$order->id])}}" class='btn btn-primary'><i class="fas fa-info-circle"></i></a>
-                        <a href="{{route('admin.order.delete', ['id'=>$order->id])}}" 
+                        <a data-toggle="tooltip" title="Xem thông tin đơn hàng" href="{{route('admin.order.show', ['id'=>$order->id])}}" class='btn btn-primary'><i class="fas fa-info-circle"></i></a>
+                        <a data-toggle="tooltip" title="Xóa" href="{{route('admin.order.delete', ['id'=>$order->id])}}" 
                           class='btn btn-danger'
                           onclick="event.preventDefault();
                           window.confirm('Bạn có chắc chắn muốn xóa đơn hàng {{$order->name}} không?') ?
@@ -202,8 +202,8 @@
                         <td>{{$order->updated_at}}</td>
                         <td>
                         
-                        <a href="{{route('admin.order.show', ['id'=>$order->id])}}" class='btn btn-primary'><i class="fas fa-info-circle"></i></a>
-                        <a href="{{route('admin.order.delete', ['id'=>$order->id])}}" 
+                        <a data-toggle="tooltip" title="Xác nhận" href="{{route('admin.order.show', ['id'=>$order->id])}}" class='btn btn-primary'><i class="fas fa-info-circle"></i></a>
+                        <a data-toggle="tooltip" title="Xóa" href="{{route('admin.order.delete', ['id'=>$order->id])}}" 
                           class='btn btn-danger'
                           onclick="event.preventDefault();
                           window.confirm('Bạn có chắc chắn muốn xóa đơn hàng {{$order->name}} không?') ?
