@@ -36,10 +36,10 @@
 
                         <div class="image">
                             @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
-                                <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
+                                <a href="{{route('frontend.home.show', ['slug' => str_slug($product->name) , 'id' => $product->id])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                      data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
                                      alt="Image"
-                                     width="208" height="300"/>
+                                     width="208" height="300"/></a>
                             @else
                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                      data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -51,7 +51,7 @@
                             <div class="title">
                                  <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}">{{ $product->name }}</a> 
                             </div>
-                            <div class="brand">{{ $product->code }}</div>
+                            <div class="brand">{{ $product->author }}</div>
                         </div>
                         <div class="prices">
                             <div class="price-prev">{{ number_format($product->regular_price, 0, ',', '.') }}</div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
             @empty
-                <div>Không có dữ liệu</div>
+                <div>Không tìm thấy</div>
             @endforelse
         </div>
     </div>

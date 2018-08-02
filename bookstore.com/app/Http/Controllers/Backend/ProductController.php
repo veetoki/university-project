@@ -283,6 +283,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->code = mb_strtoupper($request->input('code'), 'UTF-8');
         $product->author = $request->input('author');
+        $product->summary = $request->input('summary');
         $product->regular_price = $request->input('regular_price');
         $product->sale_price = $request->input('sale_price');
         $product->original_price = $request->input('original_price');
@@ -310,7 +311,7 @@ class ProductController extends Controller
           }
           $product->tags()->sync($tagsID);
         }
-        return redirect()->route('admin.product')->with('message', "Cập nhật  sản phẩm <a href='".route('admin.product.show',['id' => $id])."'>$product->name</a> thành công");
+        return redirect()->route('admin.product')->with('message', "Cập nhật  sản phẩm <a class='alert-link' href='".route('admin.product.show',['id' => $id])."'>$product->name</a> thành công");
     }
     return redirect()->route('admin.product.index')->with('error', 'Không tìm thấy sản phẩm này');
   }

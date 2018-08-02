@@ -98,7 +98,7 @@ class CategoryController extends Controller
         'parent' => $request->input('parent'),
         'order' => $order
       ]);
-      return redirect()->route('admin.category')->with('message', "Tạo chuyên mục $category->name thành công");
+      return redirect()->route('admin.category')->with('message', "Tạo chuyên mục <a class='alert-link' href='".route('admin.category.show',['id' => $id])."'>$category->name</a> thành công");
     }
     return 'store';
   }
@@ -138,7 +138,7 @@ class CategoryController extends Controller
         $category->order = $order;
         $category->slug = str_slug($request->input('name'));
         $category->save();
-        return redirect()->route('admin.category')->with('message', "Cập nhật  chuyên mục $category->name thành công");  
+        return redirect()->route('admin.category')->with('message', "Cập nhật chuyên mục <a class='alert-link' href='".route('admin.category.show',['id' => $id])."'>$category->name</a> thành công");  
       }
     }
     return redirect()->route('admin.category.index')->with('error', 'Không tìm thấy chuyên mục này');

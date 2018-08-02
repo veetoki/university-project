@@ -178,9 +178,9 @@
 
                                         <div class="image">
                                             @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
-                                                <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
+                                            <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name) , 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                      data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                     alt="Image" width="208" height="300">
+                                                     alt="Image" width="208" height="300"></a>
                                             @else
                                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                      data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -231,9 +231,9 @@
 
                                     <div class="image">
                                         @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
-                                            <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
+                                            <a href="{{route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                  data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                 alt="Image" width="208" height="300">
+                                                 alt="Image" width="208" height="300"></a>
                                         @else
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                  data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -438,9 +438,9 @@
                                 <div class="product-item">
                                     <div class="image">
                                         @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
-                                            <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
+                                        <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                             data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                            alt="Image" width="208" height="300">
+                                            alt="Image" width="208" height="300"></a>
                                         @else
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                             data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -574,9 +574,9 @@
                             {{-- <div class="ribbon red"><span>sale</span></div> --}}
                             <div class="image">
                                 @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image", "_100x150"))))
-                                    <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
+                                    <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                          data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_100x150')) }}"
-                                         alt="Image">
+                                         alt="Image"></a>
                                 @else
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                          data-echo="{{ asset('images/no_image_thumb.jpg') }}"

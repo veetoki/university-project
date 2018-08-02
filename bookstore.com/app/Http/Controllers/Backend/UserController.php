@@ -83,7 +83,7 @@ class UserController extends Controller
         'email' => $request->input('email'),
         'password' => bcrypt($request->input('password'))
       ]);
-      return redirect()->route('admin.user')->with('message', "Tạo người dùng $user->name thành công");
+      return redirect()->route('admin.user')->with('message', "Tạo người dùng <a class='alert-link' href='".route('admin.user.show',['id' => $id])."'>$user->name</a> thành công");
     }
     return 'store';
   }
@@ -120,7 +120,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->input('password'));
       }
       $user->save();
-      return redirect()->route('admin.user')->with('message', "Cập nhật  người dùng $user->name thành công");  
+      return redirect()->route('admin.user')->with('message', "Cập nhật người dùng <a class='alert-link' href='".route('admin.user.show',['id' => $id])."'>$user->name</a> thành công");  
       }
     }
     return redirect()->route('admin.user.index')->with('error', 'Không tìm thấy người dùng này');

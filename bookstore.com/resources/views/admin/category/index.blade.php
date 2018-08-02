@@ -3,10 +3,10 @@
 <div class="container">
   <div class="col-md-12">
   @if(session('message'))
-    <div class = "alert alert-success">{{session('message')}}</div>
+    <div class = "alert alert-success" style="margin-top:5%">{{session('message')}}</div>
   @endif
   @if(session('error'))
-    <div class = "alert alert-danger">{{session('error')}}</div>
+    <div class = "alert alert-danger" style="margin-top:5%">{{session('error')}}</div>
   @endif
     <div>
       <a href="{{route('admin.category.create')}}" class='btn btn-primary'><b>Tạo Chuyên Mục</b></a>

@@ -10,11 +10,11 @@
                 <div id="owl-single-product">
                     @forelse ($product->attachment as $key => $file)
                     <div class="single-product-gallery-item" id="slide-".{{$key}}>
-                        @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path,'_450x337'))))
-                        <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}">
-                            <img class="img-responsive" alt="" 
-                            src="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}" 
-                            data-echo="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}"
+                        @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path,'_308x400'))))
+                        <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($file->path, '_308x400')) }}">
+                            <img class="img-responsive img-thumbnail" alt="" 
+                            src="{{ asset('uploads/' . get_thumbnail($file->path, '_308x400')) }}" 
+                            data-echo="{{ asset('uploads/' . get_thumbnail($file->path, '_308x400')) }}"
                             />
                         </a>
                         @else
@@ -24,14 +24,14 @@
                     </div>
                     <!-- /.single-product-gallery-item -->
                     @empty 
-                        @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_450x337'))))
-                        <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}">
+                        @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_308x400'))))
+                        <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($product->image, '_308x400')) }}">
                             <img 
-                            {{--  class="img-responsive"   --}}
+                            class="img-responsive img-thumbnail" 
                             alt="" 
-                            src="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}" 
-                            data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337'))}}"
-                            width="308" height="400"/>
+                            src="{{ asset('uploads/' . get_thumbnail($product->image, '_308x400')) }}" 
+                            data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_308x400'))}}"
+                            />
                         </a>
                         @else
                         <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image" class="img-responsive img-thumbnail"> 
@@ -100,9 +100,12 @@
                 <div>
                     <label for="">Tác giả:</label> {{$product->author}}
                 </div> 
+                @if($product->translator !== '')
                 <div>
                     <label for="">Dịch giả:</label> {{$product->translator}}
-                </div> <div>
+                </div>
+                @endif 
+                <div>
                     <label for="">Nhà xuất bản:</label> {{$product->publisher}}
                 </div> 
                 {{--  <div>
@@ -124,11 +127,13 @@
                     <a class="btn-add-to-compare" href="#">add to compare list</a>
                 </div> --}}
                 @php
-                    $intro = strlen($product->summary) > 400 ? substr($product->summary,0,400)."..." : $product->summary;
+                    $wordList = explode(' ', $product->summary);
+                    $wordList = array_slice($wordList, 0 ,100);
+                    $intro = implode(' ',$wordList) . ' ...';
                 @endphp
                 <div>
                     <label for=""><h4>Giới thiệu:</h4></label>
-                    <p>{{$intro}}</p>
+                    <p style="text-align: justify">{{$intro}}</p>
                 </div>
 
                 <div class="prices">
@@ -180,7 +185,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="description">
-                    <p style="white-space:pre-wrap">{{$product->summary}}</p>
+                    <p style="white-space:pre-wrap; text-align: justify">{{$product->summary}}</p>
 
                     <div class="meta-row">
                         <div class="inline">
@@ -417,9 +422,10 @@
                             {{-- <div class="ribbon red"><span>sale</span></div> --}}
                             <div class="image">
                                 @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_100x150'))))
-                                    <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
+                                    <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                          data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_100x150')) }}"
-                                         alt="Image">
+                                         alt="Image"
+                                         class='img-thumbnail'></a>
                                 @else
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                          data-echo="{{ asset('images/no_image_thumb.jpg') }}"

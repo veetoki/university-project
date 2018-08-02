@@ -50,7 +50,7 @@
 <div class="wrapper" id="app">
     <div class="message-container" v-html="alert"></div>        
     <!-- ============================================================= TOP NAVIGATION ============================================================= -->
-    <nav class="top-bar animate-dropdown">
+    <nav class="top-bar animate-dropdown" style="position: fixed; top: 0;  left: 0; right: 0; z-index:9999;">
         <div class="container">
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul>
@@ -131,6 +131,9 @@
                             </a>
 
                             <ul class="dropdown-menu">
+                                @if(Auth::user()->hasRole('admin'))
+                                <li><a href="{{route('admin.user')}}">Trang quản lý</a></li>
+                                @endif
                                 <li><a href="{{route('frontend.user.home.orderHistory', ['id' => Auth::user()->id]) }}">Quản lý đơn hàng</a></li> 
                                 <li>
                                     <a href="{{ route('frontend.logout') }}"
@@ -262,8 +265,9 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <div v-if="cart.length === 0" class="text-center">Giỏ hàng rỗng</div>
-                                <li v-else v-for="(product, key) in cart">
+                                <div v-bind:style="styleObject">
+                                    <div v-if="cart.length === 0" class="text-center">Giỏ hàng rỗng</div>
+                                    <li v-else v-for="(product, key) in cart">
                                     <div class="basket-item">
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
@@ -277,9 +281,9 @@
                                             </div>
                                         </div>
                                         <a class="close-btn" href="/delete" v-on:click="deleteEach($event,key)"></a>
-                                    </div>
-                                </li>
-
+                                        </div>
+                                    </li>
+                                </div>
                                 <li class="checkout">
                                     <div class="basket-item">
                                         <div class="row">
@@ -764,6 +768,10 @@
             quantity: 1,
             alert: '',
             message: false,
+            styleObject:{
+                maxHeight: '255px',
+                overflowY: 'scroll',
+            },
         },
         methods: {
             addToCart: function(id , event, isSingleProduct){
@@ -819,6 +827,7 @@
             subtractQuantity: function(){
                 this.quantity -= 1;
             },
+           
         },
         mounted: function(){
             this.getCart();

@@ -47,11 +47,11 @@ class OrderController extends Controller
         switch ($order->status) {
           case 0:
             $order->status = 1;
-            $message = "Đơn hàng <a href='".route('admin.order')."'>#$order->id</a> đã được xác nhận";
+            $message = "Đơn hàng <a href='".route('admin.order')."' class='alert-link'>#$order->id</a> đã được xác nhận";
             break;
           case 1:
             $order->status = 2;
-            $message = "Đơn hàng <a href='".route('admin.order')."#deliver'>#$order->id</a> đã được vận chuyển";
+            $message = "Đơn hàng <a href='".route('admin.order')."#deliver' class='alert-link'>#$order->id</a> đã được vận chuyển";
             // Gửi mail
             Mail::to($order->email)
                 ->queue(new OrderShipped($order));

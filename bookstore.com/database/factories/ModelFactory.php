@@ -60,13 +60,13 @@ $factory->define(App\User::class, function (Faker $faker) {
 //     ];
 // });
 
-$factory->define(App\Order::class, function (Faker $faker) {
-    $name = $faker->name;
-    return [
-        'user_id' => rand(1,50),
-        'name' => $name,
-        'address' => $faker->text(80),
-        'email' => $faker->email, 
-        'phone' => $faker->phoneNumber,
-    ];
-});
+// $factory->define(App\Order::class, function (Faker $faker) {
+//     $name = $faker->name;
+//     return [
+//         'user_id' => rand(1,50),
+//         'name' => $name,
+//         'address' => $faker->text(80),
+//         'email' => $faker->email, 
+//         'phone' => $faker->phoneNumber,
+//     ];
+// });

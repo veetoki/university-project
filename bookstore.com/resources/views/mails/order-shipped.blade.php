@@ -5,7 +5,7 @@
         Đơn hàng của quý khách sẽ được giao trong ngày hôm nay {{date('d/m/Y')}}
 </p>
 
-@if($order->id !== null)
+@if($order->user_id !== null)
 @php
     $url = route('frontend.user.home.orderHistory', ['id' => $order->user_id]);
 @endphp

@@ -61,13 +61,13 @@ Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 
   Route::get("/product/{slug}-{id}.html", 'HomeController@show')
           ->name('home.show')
           ->where([
-            'slug' => '[a-z-]+',
+            'slug' => '[a-z0-9-]+',
             'id' => '[0-9]+'
           ]);
   Route::post("/product/{slug}-{id}.html", 'HomeController@comment')
          ->name('home.comment')
          ->where([
-            'slug' => '[a-z-]+',
+            'slug' => '[a-z0-9-]+',
             'id' => '[0-9]+'
           ]);
   Route::name('user.')->middleware('auth','checkUser')->group(function() {
@@ -78,7 +78,7 @@ Route::name('frontend.')->namespace('Frontend')->group(/*['prefix' => '/admin', 
   Route::get('/cart','CartController@index')->name('cart.index');
   Route::post('/cart','CartController@updateCart')->name('cart.updateCart');
   Route::get('/cart/{id}/delete','CartController@deleteCart')->name('cart.deleteCart');
-  Route::get('/cart//delete','CartController@deleteAll')->name('cart.deleteAll');
+  Route::get('/cart/delete','CartController@deleteAll')->name('cart.deleteAll');
 
   Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
   Route::post('/checkout', 'CheckoutController@placeOrder')->name('checkout.placeOrder');

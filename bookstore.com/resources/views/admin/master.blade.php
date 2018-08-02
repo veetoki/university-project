@@ -10,6 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('themes/default/assets/images/favicon1.ico') }}">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('head_styles')
@@ -17,9 +20,9 @@
     <script defer  src="{{asset('js/fontawesome-all.js')}}"></script>
     @yield('head_scripts')
 </head>
-<body>
+<body style="font-family:'Times New Roman', Times, serif">
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="position: fixed; top: 0;  left: 0; right: 0; z-index:9999;">
             <div class="container">
                 <div class="navbar-header">
 
