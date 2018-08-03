@@ -81,8 +81,9 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div style="margin-top: 5%;">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

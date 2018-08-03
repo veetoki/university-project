@@ -14,9 +14,9 @@
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
-if (env('APP_DEBUG')) {
-   $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
-}
+// if (env('APP_DEBUG')) {
+//    $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+// }
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

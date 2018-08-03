@@ -177,10 +177,11 @@
                                         {{--<div class="ribbon blue"><span>new</span></div>--}}
 
                                         <div class="image">
-                                            @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
+                                            @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_thumb'))))
                                             <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name) , 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                                     data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                     alt="Image" width="208" height="300"></a>
+                                                     data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_thumb')) }}"
+                                                     alt="Image"
+                                                     class='img-thumbnail'></a>
                                             @else
                                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                      data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -230,10 +231,11 @@
                                     {{--<div class="ribbon blue"><span>new</span></div>--}}
 
                                     <div class="image">
-                                        @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
+                                        @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_thumb'))))
                                             <a href="{{route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                                 data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                 alt="Image" width="208" height="300"></a>
+                                                 data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_thumb')) }}"
+                                                 alt="Image"
+                                                 class='img-thumbnail'></a>
                                         @else
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                  data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -274,151 +276,16 @@
                         </div>
 
                     </div>
-
-                    <div class="tab-pane" id="top-sales">
-                        <div class="product-grid-holder">
-
-                            <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
-                                <div class="product-item">
-                                    <div class="ribbon red"><span>sale</span></div>
-                                    <div class="ribbon green"><span>bestseller</span></div>
-                                    <div class="image">
-                                        <img alt="" src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                             data-echo="{{ asset('themes/default/assets/images/products/product-04.jpg') }}"/>
-                                    </div>
-                                    <div class="body">
-                                        <div class="label-discount clear"></div>
-                                        <div class="title">
-                                            <a href="single-product.html">Netbook Acer TravelMate
-                                                B113-E-10072</a>
-                                        </div>
-                                        <div class="brand">acer</div>
-                                    </div>
-                                    <div class="prices">
-                                        <div class="price-prev">$1399.00</div>
-                                        <div class="price-current pull-right">$1199.00</div>
-                                    </div>
-                                    <div class="hover-area">
-                                        <div class="add-cart-button">
-                                            <a href="single-product.html" class="le-button">add to cart</a>
-                                        </div>
-                                        <div class="wish-compare">
-                                            <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
-                                            <a class="btn-add-to-compare" href="#">compare</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
-                                <div class="product-item">
-
-                                    <div class="image">
-                                        <img alt="" src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                             data-echo="{{ asset('themes/default/assets/images/products/product-03.jpg') }}"/>
-                                    </div>
-                                    <div class="body">
-                                        <div class="label-discount clear"></div>
-                                        <div class="title">
-                                            <a href="single-product.html">POV Action Cam</a>
-                                        </div>
-                                        <div class="brand">sony</div>
-                                    </div>
-                                    <div class="prices">
-                                        <div class="price-prev">$1399.00</div>
-                                        <div class="price-current pull-right">$1199.00</div>
-                                    </div>
-                                    <div class="hover-area">
-                                        <div class="add-cart-button">
-                                            <a href="single-product.html" class="le-button">add to cart</a>
-                                        </div>
-                                        <div class="wish-compare">
-                                            <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
-                                            <a class="btn-add-to-compare" href="#">compare</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
-                                <div class="product-item">
-                                    <div class="ribbon blue"><span>new!</span></div>
-                                    <div class="image">
-                                        <img alt="" src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                             data-echo="{{ asset('themes/default/assets/images/products/product-02.jpg') }}"/>
-                                    </div>
-                                    <div class="body">
-                                        <div class="label-discount clear"></div>
-                                        <div class="title">
-                                            <a href="single-product.html">White lumia 9001</a>
-                                        </div>
-                                        <div class="brand">nokia</div>
-                                    </div>
-                                    <div class="prices">
-                                        <div class="price-prev">$1399.00</div>
-                                        <div class="price-current pull-right">$1199.00</div>
-                                    </div>
-                                    <div class="hover-area">
-                                        <div class="add-cart-button">
-                                            <a href="single-product.html" class="le-button">add to cart</a>
-                                        </div>
-                                        <div class="wish-compare">
-                                            <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
-                                            <a class="btn-add-to-compare" href="#">compare</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
-                                <div class="product-item">
-                                    <div class="ribbon red"><span>sale</span></div>
-                                    <div class="image">
-                                        <img alt="" src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                             data-echo="{{ asset('themes/default/assets/images/products/product-01.jpg') }}"/>
-                                    </div>
-                                    <div class="body">
-                                        <div class="label-discount green">-50% sale</div>
-                                        <div class="title">
-                                            <a href="single-product.html">VAIO Fit Laptop - Windows 8 SVF14322CXW</a>
-                                        </div>
-                                        <div class="brand">sony</div>
-                                    </div>
-                                    <div class="prices">
-                                        <div class="price-prev">$1399.00</div>
-                                        <div class="price-current pull-right">$1199.00</div>
-                                    </div>
-
-                                    <div class="hover-area">
-                                        <div class="add-cart-button">
-                                            <a href="single-product.html" class="le-button">add to cart</a>
-                                        </div>
-                                        <div class="wish-compare">
-                                            <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
-                                            <a class="btn-add-to-compare" href="#">compare</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="loadmore-holder text-center">
-                            <a class="btn-loadmore" href="{{route('frontend.home.productIndex',['title' => 'products'])}}">
-                                <i class="fa fa-plus"></i>
-                                Xem thêm</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- ========================================= BEST SELLERS ========================================= -->
     @if(count($best_sellers) >= 7)
     <section id="bestsellers" class="color-bg wow fadeInUp">
         <div class="container">
             <h1 class="section-title">Sách bán chạy</h1>
-
             <div class="product-grid-holder medium">
                 <div class="col-xs-12 col-md-7 no-margin">
                     @php
@@ -437,10 +304,10 @@
                             <div class="col-xs-12 col-sm-4 no-margin product-item-holder size-medium hover">
                                 <div class="product-item">
                                     <div class="image">
-                                        @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
+                                        @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_thumb'))))
                                         <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                            data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                            alt="Image" width="208" height="300"></a>
+                                            data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_thumb')) }}"
+                                            alt="Image" class='img-thumbnail'></a>
                                         @else
                                             <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                             data-echo="{{ asset('images/no_image_thumb.jpg') }}"
@@ -487,38 +354,38 @@
                                 @forelse ($product->attachment as $key => $file)
                                 <div class="single-product-gallery-item" id="slide-".{{$key}}>
                                     @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path))))
-                                    <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($file->path, '_450x337')) }}">
-                                        <!--class="img-responsive"--><img  alt="" 
-                                        src="{{ asset('uploads/' . get_thumbnail($file->path)) }}" 
-                                        data-echo="{{ asset('uploads/' . get_thumbnail($file->path)) }}"
-                                        width="308" height="400"/>
+                                    <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($file->path, '_308x400')) }}">
+                                        <img  alt="" 
+                                        src="{{ asset('uploads/' . get_thumbnail($file->path,'_308x400')) }}" 
+                                        data-echo="{{ asset('uploads/' . get_thumbnail($file->path,'_308x400')) }}"
+                                        class='img-thumbnail'/>
                                     </a>
                                     @else
-                                    <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image"> <!-- class="img-responsive" -->                        
+                                    <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image">                       
                                     @endif
                                     
                                 </div>
                                 <!-- /.single-product-gallery-item -->
                                 @empty 
-                                    @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_450x337'))))
-                                    <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}">
-                <!--class="img-responsive"--> <img alt="" 
-                                        src="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}" 
-                                        data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_450x337')) }}"
-                                        width="308" height="400"/>
+                                    @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_308x400'))))
+                                    <a data-rel="prettyphoto" href="{{ asset('uploads/' . get_thumbnail($product->image, '_308x400')) }}">
+                                        <img alt="" 
+                                        src="{{ asset('uploads/' . get_thumbnail($product->image, '_308x400')) }}" 
+                                        data-echo="{{ asset('uploads/' . get_thumbnail($product->image, '_308x400')) }}"
+                                        class='img-thumbnail'/>
                                     </a>
                                     @else
-                                    <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image"> <!-- class="img-responsive" -->
+                                    <img src="{{asset('images/no_image_thumb.jpg')}}" alt="No Image"> 
                                     @endif
                                 @endforelse
                         </div><!-- /.single-product-slider -->
                         <div class="gallery-thumbs clearfix">
                             <ul>
                                 @forelse ($product->attachment as $key => $file)            
-                                @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path,'_80x80'))))
+                                @if (file_exists(public_path(get_thumbnail('uploads/'.$file->path,'_40x60'))))
                                 <li><a class="horizontal-thumb active" data-target="#best-seller-single-product-slider" data-slide="{{$key}}" href="#slide".{{$key}}>
-                                        <img width="67" alt="" src="{{ asset('uploads/'. get_thumbnail($file->path,'_80x80')) }}" 
-                                        data-echo="{{ asset('uploads/'. get_thumbnail($file->path,'_80x80')) }}"
+                                        <img width="67" alt="" src="{{ asset('uploads/'. get_thumbnail($file->path,'_40x60')) }}" 
+                                        data-echo="{{ asset('uploads/'. get_thumbnail($file->path,'_40x60')) }}"
                                         />
                                     </a></li> 
                                 @else
@@ -549,7 +416,6 @@
         </div><!-- /.container -->
     </section><!-- /#bestsellers -->
     @endif
-    {{--  {{dd($recent_products === [])}}  --}}
     <!-- ========================================= BEST SELLERS : END ========================================= -->
     <!-- ========================================= RECENTLY VIEWED ========================================= -->
     @if($recent_products->isNotEmpty())
@@ -576,7 +442,8 @@
                                 @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image", "_100x150"))))
                                     <a href="{{ route('frontend.home.show', ['slug' => str_slug($product->name), 'id' => $product->id ])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                          data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_100x150')) }}"
-                                         alt="Image"></a>
+                                         alt="Image"
+                                         class='img-thumbnail'></a>
                                 @else
                                     <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                          data-echo="{{ asset('images/no_image_thumb.jpg') }}"

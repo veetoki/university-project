@@ -386,7 +386,7 @@ class ProductController extends Controller
           }
         }
       };
-      $deleteAllImages(['_thumb', '_450x337', '_80x80']);
+      $deleteAllImages(['_thumb', '_100x150', '_40x60', '_308x400']);
     }
   }
 

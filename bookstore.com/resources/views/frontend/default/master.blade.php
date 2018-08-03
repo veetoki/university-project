@@ -50,7 +50,7 @@
 <div class="wrapper" id="app">
     <div class="message-container" v-html="alert"></div>        
     <!-- ============================================================= TOP NAVIGATION ============================================================= -->
-    <nav class="top-bar animate-dropdown" style="position: fixed; top: 0;  left: 0; right: 0; z-index:9999;">
+    <nav class="top-bar animate-dropdown" style="position: fixed; top: 0;  left: 0; right: 0; z-index:999;">
         <div class="container">
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul>
@@ -272,7 +272,7 @@
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-4 no-margin text-center">
                                                 <div class="thumb">
-                                                    <img alt="" v-bind:src="product['image']" width="40" height="60">
+                                                    <img alt="" v-bind:src="product['image']" class='img-thumbnail'>
                                                 </div>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 no-margin">

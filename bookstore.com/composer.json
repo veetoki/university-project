@@ -6,7 +6,6 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "barryvdh/laravel-ide-helper": "^2.4",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
@@ -16,6 +15,7 @@
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.4",
         "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
@@ -59,10 +59,8 @@
         ],
         "post-update-cmd": [
                   "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-                          "php artisan ide-helper:generate",
-                                  "php artisan ide-helper:meta",
-                                          "php artisan optimize"
-                                              ]
+                  "php artisan optimize"
+        ]
     },
     "config": {
         "preferred-install": "dist",

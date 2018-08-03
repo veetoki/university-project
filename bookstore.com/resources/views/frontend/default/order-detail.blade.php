@@ -3,15 +3,17 @@
 <div class="container" style="padding-top: 2%">
         <div class="row">
             <div class="col-md-12">
-                <div>
-                    <b>Thông báo</b>
-                    <p>Xin chào <b>{{$order->user->name}},</b></p>
-                    @if($order->status < 3)
-                        <p>Đơn hàng của quý khách dự kiến sẽ được giao vào ngày <b>{{date('d/m/Y',strtotime($order->created_at->addDays(2)))}}</b></p>
-                    else
-                        <p>Chúng tôi vừa bàn giao đơn hàng của quý khách đến đối tác vận chuyển.
-                        Đơn hàng của quý khách dự kiến sẽ được giao vào ngày hôm nay <b>date('d/m/Y')</b></p>
-                    endif
+                <div class="panel panel-default">
+                    <div class="panel-heading"><b>Thông báo</b></div>
+                    <div class="panel-body">
+                        <p>Xin chào <b>{{$order->users->name}},</b></p>
+                        @if($order->status < 2)
+                            <p>Đơn hàng của quý khách dự kiến sẽ được giao vào ngày <b>{{date('d/m/Y',strtotime($order->created_at->addDays(2)))}}</b>.</p>
+                        @else
+                            <p>Chúng tôi vừa bàn giao đơn hàng của quý khách đến đối tác vận chuyển.</p>
+                            <p>Đơn hàng của quý khách dự kiến sẽ được giao vào ngày hôm nay <b>{{date('d/m/Y')}}</b>.</p>
+                        @endif
+                    </div>
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -78,10 +80,11 @@
                                         <tr>
                                             <td>
                                                 <div class="thumb">
-                                                    @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image","_80x80"))))
+                                                    @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image","_40x60"))))
                                                         <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                                        data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
-                                                        alt="Image" width="40" height="60">
+                                                        data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_40x60')) }}"
+                                                        alt="Image"
+                                                        class='img-thumbnail'>
                                                     @else
                                                         <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                                              data-echo="{{ asset('images/no_image_80x80.jpg') }}"
@@ -99,9 +102,9 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel-footer text-right"><b>Tổng tiền: </b>{{get_currency_vn($total)}}</div>
-                </div>
+                <div class="panel-footer text-right"><b>Tổng tiền: </b>{{get_currency_vn($total)}}</div>
             </div>
         </div>
     </div>
+</div>
 @endsection

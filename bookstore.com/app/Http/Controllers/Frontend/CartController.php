@@ -89,7 +89,7 @@ use App\Category;
                         $cart[$id] = [
                             'name' => $product->name,
                             'author' => $product->author,
-                            'image' => $product->image ? asset('uploads/' . get_thumbnail($product->image, '_80x80')) : asset("images/no_image_80x80.jpg"),
+                            'image' => $product->image ? asset('uploads/' . get_thumbnail($product->image, '_40x60')) : asset("images/no_image_80x80.jpg"),
                             'price' => $product->sale_price,
                             'totalQuantity' => $product->quantity,
                             'quantity' => is_numeric($request->input('quantity')) && $request->input('quantity') > 0 ? $request->input('quantity') : 1,

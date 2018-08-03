@@ -35,11 +35,11 @@
                         {{--<div class="ribbon blue"><span>new</span></div>--}}
 
                         <div class="image">
-                            @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image"))))
+                            @if (!empty($product->image) && file_exists(public_path(get_thumbnail("uploads/$product->image",'_thumb'))))
                                 <a href="{{route('frontend.home.show', ['slug' => str_slug($product->name) , 'id' => $product->id])}}"><img src="{{ asset('themes/default/assets/images/blank.gif') }}"
-                                     data-echo="{{ asset(get_thumbnail("uploads/$product->image")) }}"
+                                     data-echo="{{ asset(get_thumbnail("uploads/$product->image",'_thumb')) }}"
                                      alt="Image"
-                                     width="208" height="300"/></a>
+                                     class='img-thumbnail'/></a>
                             @else
                                 <img src="{{ asset('themes/default/assets/images/blank.gif') }}"
                                      data-echo="{{ asset('images/no_image_thumb.jpg') }}"

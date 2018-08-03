@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderShipped;
+use App\Product;
 class OrderController extends Controller
 {
     public function __construct() {
@@ -48,6 +49,11 @@ class OrderController extends Controller
           case 0:
             $order->status = 1;
             $message = "Đơn hàng <a href='".route('admin.order')."' class='alert-link'>#$order->id</a> đã được xác nhận";
+            foreach ($order->products as $productSold) {
+              $product = Product::find($productSold->pivot->product_id);
+              $product->quantity -= $productSold->pivot->quantity;
+              $product->save();
+            }
             break;
           case 1:
             $order->status = 2;
